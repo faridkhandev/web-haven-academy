@@ -18,6 +18,8 @@ use App\Http\Controllers\ForgotController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CreatorZoneController;
+use App\Http\Controllers\HomeController;
+Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/about',[AboutController::class,'index'])->name('about');
 Route::get('/contact',[ContactController::class,'index'])->name('contact');
 Route::get('/creator-zone',[CreatorZoneController::class,'index'])->name('creator.zone');
