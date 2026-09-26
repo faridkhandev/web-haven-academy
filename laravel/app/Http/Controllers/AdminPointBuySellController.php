@@ -1,7 +1,7 @@
 <?php
-namespace AppHttpControllers;
-use IlluminateHttpRequest;
-use IlluminateSupportFacadesDB;
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 class AdminPointBuySellController extends Controller {
  private function guard(Request $r):void{abort_unless($r->session()->has('admin_user_id')&&(int)$r->session()->get('admin_user_group_id')===1,403);}
  private function users(){return DB::table('bh_user as u')->leftJoin('bh_user_extra as e','e.user_id','=','u.user_id')->where('u.user_group_id',17)->select('u.user_id','u.username','u.firstname','u.lastname','e.user_no','e.buy_status','e.sell_status')->orderBy('u.user_id','desc');}
