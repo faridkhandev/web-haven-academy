@@ -78,6 +78,7 @@ Route::post('/adminlogout', [AdminLoginController::class, 'logout'])->name('admi
 Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
 
+Route::get('/admin/reports/students', [\App\Http\Controllers\AdminReportController::class, 'students'])->name('admin.reports.students');
 Route::get('/admin/attendance/student', [\App\Http\Controllers\AdminAttendanceController::class, 'student'])->name('admin.attendance.student');
 Route::get('/admin/attendance/all', [\App\Http\Controllers\AdminAttendanceController::class, 'all'])->name('admin.attendance.all');
 Route::get('/admin/attendance/teacher', [\App\Http\Controllers\AdminAttendanceController::class, 'teacher'])->name('admin.attendance.teacher');
