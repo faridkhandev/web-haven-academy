@@ -1,4 +1,5 @@
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\AdminDashboardController;
 <?php
 use App\Http\Controllers\StudentLoginController;
 use App\Http\Controllers\StudentWelcomeController;
@@ -70,3 +71,4 @@ Route::view('/block','student.block')->name('student.block');
 Route::get('/adminlogin', [AdminLoginController::class, 'show'])->name('admin.login');
 Route::post('/adminlogin', [AdminLoginController::class, 'login'])->name('admin.login.submit');
 Route::post('/adminlogout', [AdminLoginController::class, 'logout'])->name('admin.logout');
+Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
