@@ -1,0 +1,12 @@
+<?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+class AdminCourseController extends Controller{
+ private function guard(Request $r):void{abort_unless($r->session()->has('admin_user_id')&&(int)$r->session()->get('admin_user_group_id')===1,403);}
+ public function index(Request $r){$this->guard($r);$q=DB::table('bh_course')->where('course_delete_status',0);if($r->filled('name'))$q->where('course_name','like','%'.$r->name.'%');if($r->filled('status'))$q->where('course_status',$r->status);return view('admin.courses.index',['courses'=>$q->orderByDesc('course_id')->paginate(25)->withQueryString()]);}
+ public function create(Request $r){$this->guard($r);return view('admin.courses.form',['course'=>null]);}
+ public function store(Request $r){$this->guard($r);$d=$r->validate(['course_name'=>['required','string','min:3','max:50'],'course_description'=>['nullable','string'],'no_of_classes'=>['required','string','max:20'],'priority'=>['required','integer'],'course_status'=>['required','boolean'],'per_session_point'=>['required','numeric','min:0'],'require_validation'=>['required','in:1,2'],'course_image'=>['nullable','string','max:255']]);$d['course_delete_status']=0;$d['created_at']=now();$d['updated_at']=now();$d['created_by']=(int)$r->session()->get('admin_user_id');$d['updated_by']=$d['created_by'];DB::table('bh_course')->insert($d);return redirect()->route('admin.courses.index')->with('success','Course created successfully.');}
+ public function edit(Request $r,int $course){$this->guard($r);$c=DB::table('bh_course')->where('course_id',$course)->where('course_delete_status',0)->first();abort_unless($c,404);return view('admin.courses.form',['course'=>$c]);}
+ public function update(Request $r,int $course){$this->guard($r);$c=DB::table('bh_course')->where('course_id',$course)->where('course_delete_status',0)->first();abort_unless($c,404);$d=$r->validate(['course_name'=>['required','string','min:3','max:50'],'course_description'=>['nullable','string'],'no_of_classes'=>['required','string','max:20'],'priority'=>['required','integer'],'course_status'=>['required','boolean'],'per_session_point'=>['required','numeric','min:0'],'require_validation'=>['required','in:1,2'],'course_image'=>['nullable','string','max:255']]);$d['updated_at']=now();$d['updated_by']=(int)$r->session()->get('admin_user_id');DB::table('bh_course')->where('course_id',$course)->update($d);return redirect()->route('admin.courses.index')->with('success','Course updated successfully.');}
+}
