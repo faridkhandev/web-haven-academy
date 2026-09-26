@@ -79,6 +79,14 @@ Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.da
 
 
 Route::get('/admin/reports/students', [\App\Http\Controllers\AdminReportController::class, 'students'])->name('admin.reports.students');
+Route::get('/admin/pointbuysell', [\App\Http\Controllers\AdminPointBuySellController::class, 'index'])->name('admin.pointbuysell.index');
+Route::get('/admin/pointbuysell/requests', [\App\Http\Controllers\AdminPointBuySellController::class, 'requests'])->name('admin.pointbuysell.requests');
+Route::post('/admin/pointbuysell/requests/{id}/accept', [\App\Http\Controllers\AdminPointBuySellController::class, 'accept'])->name('admin.pointbuysell.accept');
+Route::post('/admin/pointbuysell/requests/{id}/complain', [\App\Http\Controllers\AdminPointBuySellController::class, 'complain'])->name('admin.pointbuysell.complain');
+Route::get('/admin/pointbuysell/{user}/wallet', [\App\Http\Controllers\AdminPointBuySellController::class, 'wallet'])->name('admin.pointbuysell.wallet');
+Route::post('/admin/pointbuysell/{user}/convert', [\App\Http\Controllers\AdminPointBuySellController::class, 'convert'])->name('admin.pointbuysell.convert');
+Route::post('/admin/pointbuysell/{user}/status', [\App\Http\Controllers\AdminPointBuySellController::class, 'status'])->name('admin.pointbuysell.status');
+
 Route::get('/admin/attendance/student', [\App\Http\Controllers\AdminAttendanceController::class, 'student'])->name('admin.attendance.student');
 Route::get('/admin/attendance/all', [\App\Http\Controllers\AdminAttendanceController::class, 'all'])->name('admin.attendance.all');
 Route::get('/admin/attendance/teacher', [\App\Http\Controllers\AdminAttendanceController::class, 'teacher'])->name('admin.attendance.teacher');
