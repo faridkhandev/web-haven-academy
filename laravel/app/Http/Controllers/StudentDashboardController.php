@@ -23,7 +23,7 @@ class StudentDashboardController extends Controller
             ->firstOrFail();
 
         $activationPoint = DB::table('bh_setting')
-            ->where('code', 'config_id_activation_point')
+            ->where('key', 'config_id_activation_point')
             ->value('value');
 
         $whatsappPending = DB::table('bh_student_to_counsellor')
