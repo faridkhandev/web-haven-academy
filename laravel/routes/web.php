@@ -92,3 +92,6 @@ Route::post('/admin/students/{student}/block', [AdminStudentController::class, '
 Route::get('/admin/finance/passbook', [AdminFinanceController::class, 'passbook'])->name('admin.finance.passbook');
 Route::get('/admin/finance/payments', [AdminFinanceController::class, 'payments'])->name('admin.finance.payments');
 Route::get('/admin/finance/withdrawals', [AdminFinanceController::class, 'withdrawals'])->name('admin.finance.withdrawals');
+
+Route::get('/admin/finance/withdrawals/{withdrawal}/process', [AdminFinanceController::class, 'processForm'])->name('admin.finance.withdrawal.process');
+Route::post('/admin/finance/withdrawals/{withdrawal}/process', [AdminFinanceController::class, 'processWithdrawal'])->name('admin.finance.withdrawal.process.submit');
