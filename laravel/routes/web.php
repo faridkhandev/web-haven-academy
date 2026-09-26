@@ -120,6 +120,7 @@ Route::get('/admin/students/{student}/referrals', [AdminStudentController::class
 Route::get('/admin/students/{student}/edit', [AdminStudentController::class, 'edit'])->name('admin.students.edit');
 Route::put('/admin/students/{student}', [AdminStudentController::class, 'update'])->name('admin.students.update');
 Route::post('/admin/students/{student}/block', [AdminStudentController::class, 'block'])->name('admin.students.block');
+Route::post('/admin/students/{student}/unblock', [AdminStudentController::class, 'unblock'])->name('admin.students.unblock');
 
 Route::get('/admin/finance/passbook', [AdminFinanceController::class, 'passbook'])->name('admin.finance.passbook');
 Route::get('/admin/finance/payments', [AdminFinanceController::class, 'payments'])->name('admin.finance.payments');
