@@ -99,6 +99,8 @@ Route::get('/admin/settings', [\App\Http\Controllers\AdminSettingsController::cl
 Route::post('/admin/settings', [\App\Http\Controllers\AdminSettingsController::class, 'update'])->name('admin.settings.update');
 Route::get('/admin/permissions', [\App\Http\Controllers\AdminPermissionController::class, 'index'])->name('admin.permissions.index');
 Route::post('/admin/permissions', [\App\Http\Controllers\AdminPermissionController::class, 'update'])->name('admin.permissions.update');
+Route::get('/admin/profile', [\App\Http\Controllers\AdminUserProfileController::class, 'edit'])->name('admin.profile.edit');
+Route::post('/admin/profile', [\App\Http\Controllers\AdminUserProfileController::class, 'update'])->name('admin.profile.update');
 Route::get('/admin/users', [AdminUserController::class, 'index'])->name('admin.users.index');
 Route::get('/admin/users/create', [AdminUserController::class, 'create'])->name('admin.users.create');
 Route::post('/admin/users', [AdminUserController::class, 'store'])->name('admin.users.store');
