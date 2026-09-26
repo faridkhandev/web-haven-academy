@@ -87,6 +87,9 @@ Route::put('/admin/users/{user}', [AdminUserController::class, 'update'])->name(
 Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
 
 Route::get('/admin/students', [AdminStudentController::class, 'index'])->name('admin.students.index');
+Route::post('/admin/students/{student}/activate', [AdminStudentController::class, 'activate'])->name('admin.students.activate');
+Route::post('/admin/students/{student}/join-approve', [AdminStudentController::class, 'joinApprove'])->name('admin.students.join-approve');
+Route::post('/admin/students/{student}/join-send', [AdminStudentController::class, 'sendJoiningPoint'])->name('admin.students.join-send');
 Route::get('/admin/students/{student}/edit', [AdminStudentController::class, 'edit'])->name('admin.students.edit');
 Route::put('/admin/students/{student}', [AdminStudentController::class, 'update'])->name('admin.students.update');
 Route::post('/admin/students/{student}/block', [AdminStudentController::class, 'block'])->name('admin.students.block');
