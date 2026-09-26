@@ -6,7 +6,6 @@ use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\AdminFinanceController;
 use App\Http\Controllers\AdminCourseController;
 use App\Http\Controllers\AdminSessionController;
-<?php
 use App\Http\Controllers\StudentLoginController;
 use App\Http\Controllers\StudentWelcomeController;
 use App\Http\Controllers\StudentDashboardController;
