@@ -29,6 +29,8 @@ class RegisterController extends Controller
         $country = (string) $request->input('country');
         $lengths = ['+88'=>11, '+91'=>10, '+966'=>9, '+971'=>9];
 
+        $phoneLength = $lengths[$country] ?? 10;
+
         $request->validate([
             'student_name' => ['required','string','min:3','max:30'],
             'student_password' => ['required','string','min:8','regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$/'],
@@ -115,16 +117,11 @@ class RegisterController extends Controller
 
     private function decodeStudentNo(string $code): ?int
     {
-        $candidate = $code;
-        $raw = base64_decode(strtr($candidate, '-_', '+/'), true);
-        if ($raw !== false && $raw !== '') {
-            $candidate = $raw;
-        }
-        $students = Student::where('student_status',1)->where('student_delete_status',0)
-            ->whereBetween('student_no',[1000000,999999999])->get(['student_no']);
-        foreach ($students as $s) {
-            if (md5((string)$s->student_no) === $code) return (int)$s->student_no;
-        }
-        return null;
+        $student = Student::where('student_status', 1)
+            ->where('student_delete_status', 0)
+            ->whereRaw('MD5(student_no) = ?', [$code])
+            ->first(['student_no']);
+
+        return $student ? (int) $student->student_no : null;
     }
 }
