@@ -6,6 +6,7 @@ use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\StudentPointController;
 use App\Http\Controllers\StudentPasswordController;
+use App\Http\Controllers\StudentLogoutController;
 use Illuminate\Support\Facades\Route;
 Route::get('/studentlogin',[StudentLoginController::class,'show'])->name('student.login');
 Route::post('/studentlogin',[StudentLoginController::class,'login'])->name('student.login.submit');
@@ -27,5 +28,6 @@ Route::post('/student/withdrawal/addrequest',[StudentPointController::class,'add
 Route::post('/student/point/joinrequest',[StudentPointController::class,'joinRequest'])->name('student.point.join');
 Route::get('/student/password',[StudentPasswordController::class,'edit'])->name('student.password');
 Route::post('/student/password',[StudentPasswordController::class,'update'])->name('student.password.update');
+Route::get('/student/logout',StudentLogoutController::class)->name('student.logout');
 Route::view('/block','student.block')->name('student.block');
 });
