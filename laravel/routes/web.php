@@ -86,6 +86,7 @@ Route::put('/admin/users/{user}', [AdminUserController::class, 'update'])->name(
 Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
 
 Route::get('/admin/students', [AdminStudentController::class, 'index'])->name('admin.students.index');
+Route::get('/admin/students/quick/{status}', [AdminStudentController::class, 'quick'])->name('admin.students.quick');
 Route::post('/admin/students/{student}/activate', [AdminStudentController::class, 'activate'])->name('admin.students.activate');
 Route::post('/admin/students/{student}/add-point', [AdminStudentController::class, 'addPoint'])->name('admin.students.add-point');
 Route::post('/admin/students/{student}/remove-point', [AdminStudentController::class, 'removePoint'])->name('admin.students.remove-point');
