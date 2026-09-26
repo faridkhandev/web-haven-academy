@@ -15,6 +15,7 @@ Route::get('/student/welcome',[StudentWelcomeController::class,'index'])->name('
 Route::get('/student/dashboard',[StudentDashboardController::class,'index'])->name('student.dashboard');
 Route::get('/student/profile',[StudentProfileController::class,'index'])->name('student.profile');
 Route::post('/student/profile',[StudentProfileController::class,'update'])->name('student.profile.update');
+Route::post('/student/profile/active',[StudentProfileController::class,'active'])->name('student.profile.active');
 Route::get('/student/course',[StudentCourseController::class,'index'])->name('student.course');
 Route::get('/student/course/view',[StudentCourseController::class,'view'])->name('student.course.view');
 Route::get('/student/course/sessionview',[StudentCourseController::class,'sessionView'])->name('student.course.session');
