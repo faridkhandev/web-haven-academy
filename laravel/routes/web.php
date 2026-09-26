@@ -1,3 +1,4 @@
+use App\Http\Controllers\AdminLoginController;
 <?php
 use App\Http\Controllers\StudentLoginController;
 use App\Http\Controllers\StudentWelcomeController;
@@ -66,3 +67,6 @@ Route::post('/student/password',[StudentPasswordController::class,'update'])->na
 Route::get('/student/logout',StudentLogoutController::class)->name('student.logout');
 Route::view('/block','student.block')->name('student.block');
 });
+Route::get('/adminlogin', [AdminLoginController::class, 'show'])->name('admin.login');
+Route::post('/adminlogin', [AdminLoginController::class, 'login'])->name('admin.login.submit');
+Route::post('/adminlogout', [AdminLoginController::class, 'logout'])->name('admin.logout');
