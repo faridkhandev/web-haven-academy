@@ -14,9 +14,14 @@ use App\Http\Controllers\StudentJoinPointController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ForgotController;
 Route::get('/courses',[CoursesController::class,'index'])->name('courses');
 Route::get('/register',[RegisterController::class,'index'])->name('register');
 Route::post('/register',[RegisterController::class,'store'])->name('register.store');
+Route::get('/forgot',[ForgotController::class,'index'])->name('forgot');
+Route::post('/forgot',[ForgotController::class,'send'])->name('forgot.send');
+Route::get('/forgot/resetpassword/token/{token}',[ForgotController::class,'resetForm'])->name('forgot.reset');
+Route::post('/forgot/resetpassword/token/{token}',[ForgotController::class,'reset'])->name('forgot.reset.update');
 Route::get('/studentlogin',[StudentLoginController::class,'show'])->name('student.login');
 Route::post('/studentlogin',[StudentLoginController::class,'login'])->name('student.login.submit');
 Route::middleware('web')->group(function(){
