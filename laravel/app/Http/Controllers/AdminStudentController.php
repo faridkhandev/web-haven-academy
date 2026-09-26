@@ -1,4 +1,11 @@
 <?php
+    public function unblock(Request $request, int $student)
+    {
+        abort_unless($this->guard($request), 403);
+        DB::table('bh_student')->where('id',$student)->where('student_delete_status',0)->update(['student_status'=>1]);
+        return back()->with('success','Student unblocked successfully.');
+    }
+
 namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
