@@ -2,6 +2,7 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminStudentController;
+use App\Http\Controllers\AdminFinanceController;
 <?php
 use App\Http\Controllers\StudentLoginController;
 use App\Http\Controllers\StudentWelcomeController;
@@ -87,3 +88,7 @@ Route::get('/admin/students', [AdminStudentController::class, 'index'])->name('a
 Route::get('/admin/students/{student}/edit', [AdminStudentController::class, 'edit'])->name('admin.students.edit');
 Route::put('/admin/students/{student}', [AdminStudentController::class, 'update'])->name('admin.students.update');
 Route::post('/admin/students/{student}/block', [AdminStudentController::class, 'block'])->name('admin.students.block');
+
+Route::get('/admin/finance/passbook', [AdminFinanceController::class, 'passbook'])->name('admin.finance.passbook');
+Route::get('/admin/finance/payments', [AdminFinanceController::class, 'payments'])->name('admin.finance.payments');
+Route::get('/admin/finance/withdrawals', [AdminFinanceController::class, 'withdrawals'])->name('admin.finance.withdrawals');
