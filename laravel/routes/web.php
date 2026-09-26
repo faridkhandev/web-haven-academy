@@ -28,7 +28,6 @@ Route::post('/student/sellpoint/addrequest',[StudentSellPointController::class,'
 Route::get('/student/sellpointlist',[StudentSellPointController::class,'list'])->name('student.sellpoint.list');
 Route::post('/student/sellpointlist/complain',[StudentSellPointController::class,'complain'])->name('student.sellpoint.complain');
 Route::post('/student/sellpointlist/accept',[StudentSellPointController::class,'accept'])->name('student.sellpoint.accept');
-Route::post('/student/medium',[StudentMediumController::class,'update'])->name('student.medium.update');
 Route::get('/student/refer',[StudentReferController::class,'index'])->name('student.refer');
 Route::post('/student/refer/list',[StudentReferController::class,'list'])->name('student.refer.list');
 Route::post('/student/refer/updatewhatsappp',[StudentReferController::class,'updateWhatsapp'])->name('student.refer.whatsapp');
