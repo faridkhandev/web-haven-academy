@@ -16,7 +16,6 @@ use App\Http\Controllers\StudentPasswordController;
 use App\Http\Controllers\StudentLogoutController;
 use App\Http\Controllers\StudentReferController;
 use App\Http\Controllers\StudentMediumController;
-use App\Http\Controllers\StudentSellPointController;
 use App\Http\Controllers\StudentJoinPointController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoursesController;
@@ -88,6 +87,9 @@ Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->n
 
 Route::get('/admin/students', [AdminStudentController::class, 'index'])->name('admin.students.index');
 Route::post('/admin/students/{student}/activate', [AdminStudentController::class, 'activate'])->name('admin.students.activate');
+Route::post('/admin/students/{student}/add-point', [AdminStudentController::class, 'addPoint'])->name('admin.students.add-point');
+Route::post('/admin/students/{student}/remove-point', [AdminStudentController::class, 'removePoint'])->name('admin.students.remove-point');
+Route::post('/admin/students/{student}/assign-counsellor', [AdminStudentController::class, 'assignCounsellor'])->name('admin.students.assign-counsellor');
 Route::post('/admin/students/{student}/join-approve', [AdminStudentController::class, 'joinApprove'])->name('admin.students.join-approve');
 Route::post('/admin/students/{student}/join-send', [AdminStudentController::class, 'sendJoiningPoint'])->name('admin.students.join-send');
 Route::get('/admin/students/{student}/edit', [AdminStudentController::class, 'edit'])->name('admin.students.edit');
