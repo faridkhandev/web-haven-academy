@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\AdminFinanceController;
 use App\Http\Controllers\AdminCourseController;
+use App\Http\Controllers\AdminSessionController;
 <?php
 use App\Http\Controllers\StudentLoginController;
 use App\Http\Controllers\StudentWelcomeController;
@@ -102,3 +103,12 @@ Route::get('/admin/courses/create', [AdminCourseController::class, 'create'])->n
 Route::post('/admin/courses', [AdminCourseController::class, 'store'])->name('admin.courses.store');
 Route::get('/admin/courses/{course}/edit', [AdminCourseController::class, 'edit'])->name('admin.courses.edit');
 Route::put('/admin/courses/{course}', [AdminCourseController::class, 'update'])->name('admin.courses.update');
+
+Route::get('/admin/sessions', [AdminSessionController::class, 'index'])->name('admin.sessions.index');
+Route::get('/admin/sessions/create', [AdminSessionController::class, 'create'])->name('admin.sessions.create');
+Route::post('/admin/sessions', [AdminSessionController::class, 'store'])->name('admin.sessions.store');
+Route::get('/admin/sessions/{session}/edit', [AdminSessionController::class, 'edit'])->name('admin.sessions.edit');
+Route::put('/admin/sessions/{session}', [AdminSessionController::class, 'update'])->name('admin.sessions.update');
+Route::get('/admin/sessions/{session}/submissions', [AdminSessionController::class, 'submissions'])->name('admin.sessions.submissions');
+Route::post('/admin/sessions/submissions/{submission}/approve', [AdminSessionController::class, 'approve'])->name('admin.sessions.submission.approve');
+Route::post('/admin/sessions/submissions/{submission}/wrong', [AdminSessionController::class, 'wrong'])->name('admin.sessions.submission.wrong');
