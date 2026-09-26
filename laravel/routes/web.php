@@ -12,6 +12,8 @@ use App\Http\Controllers\StudentMediumController;
 use App\Http\Controllers\StudentSellPointController;
 use App\Http\Controllers\StudentJoinPointController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CoursesController;
+Route::get('/courses',[CoursesController::class,'index'])->name('courses');
 Route::get('/studentlogin',[StudentLoginController::class,'show'])->name('student.login');
 Route::post('/studentlogin',[StudentLoginController::class,'login'])->name('student.login.submit');
 Route::middleware('web')->group(function(){
