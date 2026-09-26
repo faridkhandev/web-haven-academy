@@ -78,6 +78,8 @@ Route::post('/adminlogout', [AdminLoginController::class, 'logout'])->name('admi
 Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
 
+Route::get('/admin/settings', [\App\Http\Controllers\AdminSettingsController::class, 'index'])->name('admin.settings.index');
+Route::post('/admin/settings', [\App\Http\Controllers\AdminSettingsController::class, 'update'])->name('admin.settings.update');
 Route::get('/admin/permissions', [\App\Http\Controllers\AdminPermissionController::class, 'index'])->name('admin.permissions.index');
 Route::post('/admin/permissions', [\App\Http\Controllers\AdminPermissionController::class, 'update'])->name('admin.permissions.update');
 Route::get('/admin/users', [AdminUserController::class, 'index'])->name('admin.users.index');
