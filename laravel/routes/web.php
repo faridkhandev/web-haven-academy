@@ -10,6 +10,7 @@ use App\Http\Controllers\StudentLogoutController;
 use App\Http\Controllers\StudentReferController;
 use App\Http\Controllers\StudentMediumController;
 use App\Http\Controllers\StudentSellPointController;
+use App\Http\Controllers\StudentJoinPointController;
 use Illuminate\Support\Facades\Route;
 Route::get('/studentlogin',[StudentLoginController::class,'show'])->name('student.login');
 Route::post('/studentlogin',[StudentLoginController::class,'login'])->name('student.login.submit');
@@ -21,6 +22,7 @@ Route::post('/student/profile',[StudentProfileController::class,'update'])->name
 Route::post('/student/profile/active',[StudentProfileController::class,'active'])->name('student.profile.active');
 Route::get('/student/medium',[StudentMediumController::class,'index'])->name('student.medium');
 Route::post('/student/medium',[StudentMediumController::class,'update'])->name('student.medium.update');
+Route::get('/student/joinpoint',[StudentJoinPointController::class,'index'])->name('student.joinpoint');
 Route::get('/student/sellpoint',[StudentSellPointController::class,'index'])->name('student.sellpoint');
 Route::post('/student/sellpoint/addrequest',[StudentSellPointController::class,'addRequest'])->name('student.sellpoint.add');
 Route::get('/student/sellpointlist',[StudentSellPointController::class,'list'])->name('student.sellpoint.list');
