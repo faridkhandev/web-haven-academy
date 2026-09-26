@@ -33,6 +33,7 @@ Route::get('/student/refer',[StudentReferController::class,'index'])->name('stud
 Route::post('/student/refer/list',[StudentReferController::class,'list'])->name('student.refer.list');
 Route::post('/student/refer/updatewhatsappp',[StudentReferController::class,'updateWhatsapp'])->name('student.refer.whatsapp');
 Route::get('/student/course',[StudentCourseController::class,'index'])->name('student.course');
+Route::get('/student/ourcourse',[StudentCourseController::class,'index'])->name('student.ourcourse');
 Route::get('/student/course/view',[StudentCourseController::class,'view'])->name('student.course.view');
 Route::get('/student/course/sessionview',[StudentCourseController::class,'sessionView'])->name('student.course.session');
 Route::post('/student/course/addrequest',[StudentCourseController::class,'addRequest'])->name('student.course.addrequest');
