@@ -93,6 +93,7 @@ Route::post('/admin/students/{student}/remove-point', [AdminStudentController::c
 Route::post('/admin/students/{student}/assign-counsellor', [AdminStudentController::class, 'assignCounsellor'])->name('admin.students.assign-counsellor');
 Route::post('/admin/students/{student}/join-approve', [AdminStudentController::class, 'joinApprove'])->name('admin.students.join-approve');
 Route::post('/admin/students/{student}/join-send', [AdminStudentController::class, 'sendJoiningPoint'])->name('admin.students.join-send');
+Route::get('/admin/students/{student}/referrals', [AdminStudentController::class, 'referrals'])->name('admin.students.referrals');
 Route::get('/admin/students/{student}/edit', [AdminStudentController::class, 'edit'])->name('admin.students.edit');
 Route::put('/admin/students/{student}', [AdminStudentController::class, 'update'])->name('admin.students.update');
 Route::post('/admin/students/{student}/block', [AdminStudentController::class, 'block'])->name('admin.students.block');
