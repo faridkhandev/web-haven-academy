@@ -3,6 +3,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\AdminFinanceController;
+use App\Http\Controllers\AdminCourseController;
 <?php
 use App\Http\Controllers\StudentLoginController;
 use App\Http\Controllers\StudentWelcomeController;
@@ -95,3 +96,9 @@ Route::get('/admin/finance/withdrawals', [AdminFinanceController::class, 'withdr
 
 Route::get('/admin/finance/withdrawals/{withdrawal}/process', [AdminFinanceController::class, 'processForm'])->name('admin.finance.withdrawal.process');
 Route::post('/admin/finance/withdrawals/{withdrawal}/process', [AdminFinanceController::class, 'processWithdrawal'])->name('admin.finance.withdrawal.process.submit');
+
+Route::get('/admin/courses', [AdminCourseController::class, 'index'])->name('admin.courses.index');
+Route::get('/admin/courses/create', [AdminCourseController::class, 'create'])->name('admin.courses.create');
+Route::post('/admin/courses', [AdminCourseController::class, 'store'])->name('admin.courses.store');
+Route::get('/admin/courses/{course}/edit', [AdminCourseController::class, 'edit'])->name('admin.courses.edit');
+Route::put('/admin/courses/{course}', [AdminCourseController::class, 'update'])->name('admin.courses.update');
