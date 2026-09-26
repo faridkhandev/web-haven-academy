@@ -78,6 +78,10 @@ Route::post('/adminlogout', [AdminLoginController::class, 'logout'])->name('admi
 Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
 
+Route::get('/admin/attendance/student', [\App\Http\Controllers\AdminAttendanceController::class, 'student'])->name('admin.attendance.student');
+Route::get('/admin/attendance/all', [\App\Http\Controllers\AdminAttendanceController::class, 'all'])->name('admin.attendance.all');
+Route::get('/admin/attendance/teacher', [\App\Http\Controllers\AdminAttendanceController::class, 'teacher'])->name('admin.attendance.teacher');
+Route::get('/admin/attendance/teacher/{teacher}', [\App\Http\Controllers\AdminAttendanceController::class, 'teacherDetails'])->name('admin.attendance.teacher.details');
 Route::get('/admin/settings', [\App\Http\Controllers\AdminSettingsController::class, 'index'])->name('admin.settings.index');
 Route::post('/admin/settings', [\App\Http\Controllers\AdminSettingsController::class, 'update'])->name('admin.settings.update');
 Route::get('/admin/permissions', [\App\Http\Controllers\AdminPermissionController::class, 'index'])->name('admin.permissions.index');
