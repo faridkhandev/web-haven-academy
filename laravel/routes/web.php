@@ -8,6 +8,7 @@ use App\Http\Controllers\StudentPointController;
 use App\Http\Controllers\StudentPasswordController;
 use App\Http\Controllers\StudentLogoutController;
 use App\Http\Controllers\StudentReferController;
+use App\Http\Controllers\StudentMediumController;
 use Illuminate\Support\Facades\Route;
 Route::get('/studentlogin',[StudentLoginController::class,'show'])->name('student.login');
 Route::post('/studentlogin',[StudentLoginController::class,'login'])->name('student.login.submit');
@@ -17,6 +18,8 @@ Route::get('/student/dashboard',[StudentDashboardController::class,'index'])->na
 Route::get('/student/profile',[StudentProfileController::class,'index'])->name('student.profile');
 Route::post('/student/profile',[StudentProfileController::class,'update'])->name('student.profile.update');
 Route::post('/student/profile/active',[StudentProfileController::class,'active'])->name('student.profile.active');
+Route::get('/student/medium',[StudentMediumController::class,'index'])->name('student.medium');
+Route::post('/student/medium',[StudentMediumController::class,'update'])->name('student.medium.update');
 Route::get('/student/refer',[StudentReferController::class,'index'])->name('student.refer');
 Route::post('/student/refer/list',[StudentReferController::class,'list'])->name('student.refer.list');
 Route::post('/student/refer/updatewhatsappp',[StudentReferController::class,'updateWhatsapp'])->name('student.refer.whatsapp');
