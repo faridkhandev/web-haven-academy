@@ -22,7 +22,7 @@ class StudentDashboardController extends Controller
                 'tl.firstname as tl_firstname', 'tl.lastname as tl_lastname')
             ->firstOrFail();
 
-        $activationPoint = DB::table('setting')
+        $activationPoint = DB::table('bh_setting')
             ->where('code', 'config_id_activation_point')
             ->value('value');
 
