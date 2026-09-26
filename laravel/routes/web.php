@@ -79,6 +79,10 @@ Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.da
 
 
 Route::get('/admin/reports/students', [\App\Http\Controllers\AdminReportController::class, 'students'])->name('admin.reports.students');
+Route::get('/admin/user-finance/passbook', [\App\Http\Controllers\AdminUserFinanceController::class, 'passbook'])->name('admin.userfinance.passbook');
+Route::get('/admin/user-finance/payments', [\App\Http\Controllers\AdminUserFinanceController::class, 'payments'])->name('admin.userfinance.payments');
+Route::get('/admin/user-finance/withdrawals', [\App\Http\Controllers\AdminUserFinanceController::class, 'withdrawals'])->name('admin.userfinance.withdrawals');
+Route::post('/admin/user-finance/withdrawals/{id}/process', [\App\Http\Controllers\AdminUserFinanceController::class, 'process'])->name('admin.userfinance.withdrawals.process');
 Route::get('/admin/pointbuysell', [\App\Http\Controllers\AdminPointBuySellController::class, 'index'])->name('admin.pointbuysell.index');
 Route::get('/admin/pointbuysell/requests', [\App\Http\Controllers\AdminPointBuySellController::class, 'requests'])->name('admin.pointbuysell.requests');
 Route::post('/admin/pointbuysell/requests/{id}/accept', [\App\Http\Controllers\AdminPointBuySellController::class, 'accept'])->name('admin.pointbuysell.accept');
