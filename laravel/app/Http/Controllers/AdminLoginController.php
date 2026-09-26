@@ -63,7 +63,7 @@ class AdminLoginController extends Controller
         ]);
 
         // Upgrade legacy password storage after a successful login.
-        if ($user->password === md5($data['password']) || (!empty($user->salt) && hash_equals((string) $user->password, sha1($user->salt . sha1($user->salt . sha1($data['password])))))) {
+        if ($user->password === md5($data['password']) || (!empty($user->salt) && hash_equals((string) $user->password, sha1($user->salt . sha1($user->salt . sha1($data['password'])))))) {
             $user->password = Hash::make($data['password']);
             $user->salt = '';
             $user->save();
