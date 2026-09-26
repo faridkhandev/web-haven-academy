@@ -1,0 +1,387 @@
+<?php $this->load->view('front/header'); ?>
+<style>
+/* ===== Register Form Styling ===== */
+.bg-secondary {
+    background: #ffffff !important;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+}
+.portion {
+    margin-bottom: 18px;
+}
+.portion label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+/*
+
+
+
+
+.form-control {
+    height: 48px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.form-control:focus {
+    border-color: #1e90ff;
+    box-shadow: 0 0 0 0.15rem rgba(30,144,255,.15);
+}*/
+
+.withForm .form-control {
+    border-radius: 0;
+}
+
+.withForm .code {
+    max-width: 90px;
+    background: #f8f9fa;
+    font-weight: 600;
+    text-align: center;
+}
+
+.withForm .code:first-child {
+    border-radius: 6px 0 0 6px;
+}
+
+.withForm .form-control:last-child {
+    border-radius: 0 6px 6px 0;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.alert {
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.btn-theme {
+    background: linear-gradient(135deg, #1e90ff, #0066cc);
+    color: #fff;
+    border-radius: 6px;
+    padding: 12px 35px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-theme:hover {
+    background: linear-gradient(135deg, #0066cc, #1e90ff);
+    transform: translateY(-1px);
+}
+
+.forgot {
+    margin-top: 20px;
+}
+
+.register {
+    margin-top: 25px;
+    font-size: 14px;
+}
+
+.register a {
+    font-weight: 600;
+    color: #1e90ff;
+}
+
+
+</style>
+
+
+
+<style>
+    
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+        color: #FFF;
+    }
+        :root{
+  --bg1:#0f2027;
+  --bg2:#203a43;
+  --bg3:#2c5364;
+  --glass: rgba(255,255,255,.10);
+  --glass-border: rgba(255,255,255,.16);
+  --accent:#ffc107;
+  --text-soft: rgba(255,255,255,.78);
+}
+    
+    .mainbody_body{
+    background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+    color: #fff;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }  
+    
+    .mainbody_body a{
+        color: #FFF;
+    }
+    
+    .card-glass{
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 45px rgba(0,0,0,.25);
+}
+    
+.page__container .card-body {
+    padding: 15px 20px;
+}
+    .card-glass-thumb{
+        color: #FFF;
+    }
+    .card-glass-thumb .label{
+        color: var(--accent);
+        min-height: 50px;
+    }
+    
+    
+    .card-glass-thumb .value{
+        font-size: 2.2rem;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-bottom: 7px;
+    }
+    
+    
+.page__heading {
+    background: none !important;
+    color: #FFF;
+}
+    
+.card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, .25);
+          color: #FFF;
+}
+.card-header:first-child{
+  border-radius: 18px 18px 0 0;
+}
+
+.card .badge{
+  background: rgba(255, 193, 7, .15);
+border: 1px solid rgba(255, 193, 7, .35);
+color: var(--accent);
+  font-size: 18px;
+}
+    
+.btn.btn-accent{
+  background: var(--accent);
+  color: #111;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  padding: 10px 35px;
+}
+.btn.btn-accent:hover{ background:#ffb300; }
+    
+.form-control{
+        background: rgba(255, 255, 255, .12) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, .18) !important;
+    border-radius: 4px;
+    font-weight: 400;
+    padding: 10px 18px;
+    height: auto;
+    }
+
+    .form-control::placeholder{
+    	color: rgba(255, 255, 255, 0.5) !important;
+    }
+    
+.card .form-control option{
+        color: #000
+    }
+    
+.table thead th{
+        color: #FFF;
+    }
+    .dataTables_scrollHeadInner{
+        max-width: 100%;
+    }
+.dataTable{
+         max-width: 100%;
+    }
+    
+.page-link{
+        height: 34px;
+    }
+    
+    
+    .form-group label{
+        color: #FFF;
+    }
+    
+    .container-fluid.bg-dark.text-white.py-5.px-sm-3.px-lg-5{
+        margin-top: 0px !important;
+    }
+    
+    
+</style>
+
+<!-- Header Start -->
+    <div class="container-fluid page-header">
+        <div class="container">
+            <div class="d-flex flex-column justify-content-center" style="min-height: 200px">
+                <h3 class="display-4 text-white text-uppercase">Register</h3>
+                <div class="d-inline-flex text-white">
+                    <p class="m-0 text-uppercase"><a class="text-white" href="<?php echo base_url();?>">Home</a></p>
+                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                    <p class="m-0 text-uppercase">Register</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+	<div class="container-fluid mainbody_body">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card card-glass rounded p-5 ">
+						<?php echo validation_errors(); ?>
+						<?php if(isset($success)){?>
+						<div class="alert alert-success alert-dismissible">
+						<strong>Success!</strong><?php echo $success;?>
+						</div>
+						<?php } ?>
+						<?php if(isset($error)){?>
+						<div class="alert alert-danger alert-dismissible">
+						<strong>Danger!</strong><?php echo $error;?>
+						</div>
+						<?php } ?>
+						<?php if($student){ ?>
+                        <form action="<?php echo site_url('register'); ?>?refer_id=<?php echo $refer_code; ?>" method="post">
+                            <div class="row">
+								<div class="col-md-12">
+									<div class="portion">
+										<label for="">* Name</label>
+										<input type="text" name="student_name" placeholder="Name" class="form-control" value="<?php echo set_value('student_name'); ?>" required>
+									</div>
+								</div>
+								<!--div class="col-md-6">
+									<div class="portion">
+										<label for="">* Email</label>
+										<input type="email" name="student_email" placeholder="Email" class="form-control" value="<?php echo set_value('student_email'); ?>" required>
+									</div>
+								</div-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="portion">
+										<label for="">* Password</label>
+										<input type="password" name="student_password" placeholder="Password" value="<?php echo set_value('student_password'); ?>" class="form-control" required>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="portion">
+										<label for="">* Confirm Password</label>
+										<input type="password" name="student_confirm_password" placeholder="Confirm Password" value="<?php echo set_value('student_confirm_password'); ?>" class="form-control" required>
+									</div>
+								</div>
+							</div>
+							<div class="row"><div class="col-md-12"><p class="small" style="opacity: .7;">The Password must be at least 8 characters long and contain at least one letter, one number, and one special character.(@$!%*?&#)</p></div></div>
+							<div class="row">
+								<!--div class="col-md-6">
+									<div class="portion">
+										<label for="">* City</label>
+										<input type="text" name="student_city" placeholder="City" value="<?php echo set_value('student_city'); ?>" class="form-control" required>
+									</div>
+								</div-->
+								<div class="col-md-6">
+									<div class="portion">
+										<label for="">* Gender</label>
+										<select id="student_gender" name="student_gender" class="form-control"required>
+											<option value="Male" <?php if(set_value('student_gender') == 'Male') echo 'selected'; ?>>Male</option>
+											<option value="Female" <?php if(set_value('student_gender') == 'Female') echo 'selected'; ?>>Female</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="portion">
+										<label for="">* Country</label>
+										<select id="code_select1" name="country" class="form-control" required>
+											<option value="">-Please Select-</option>
+											<option value="+88" <?php if(set_value('country') == '+88') echo 'selected'; ?>>Bangladesh</option>
+											<option value="+91" <?php if(set_value('country') == '+91') echo 'selected'; ?>>India</option>
+											<option value="+966" <?php if(set_value('country') == '+966') echo 'selected'; ?>>Saudi Arabia</option>
+											<option value="+971" <?php if(set_value('country') == '+971') echo 'selected'; ?>>United Arab Emirates</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="row">
+								
+								<div class="col-md-6">
+									<div class="portion">
+										<label for="">* Language</label>
+										<select name="student_language" class="form-control" id="" required>
+											<option value="">-Please Select-</option>
+											<option value="Hindi" <?php if(set_value('student_language') == 'Hindi') echo 'selected'; ?>>Hindi</option>
+											 <option value="Assamese" <?php if(set_value('student_language') == 'Assamese') echo 'selected'; ?>>Assamese</option>
+											<option value="Bengali" <?php if(set_value('student_language') == 'Bengali') echo 'selected'; ?>>Bengali</option>
+										   
+										</select>
+									</div>
+								</div>
+							</div> -->
+							<div class="row">
+								<div class="col-md-6">
+									<div class="portion">
+										<label for="">* Phone No</label>
+										<div class="d-flex withForm">
+											<input type="text" value="<?php echo set_value('phone_code', '+88'); ?>" class="form-control code" readonly name="phone_code" id="">
+											<input type="text" name="student_phone" placeholder="Phone No" value="<?php echo set_value('student_phone'); ?>" class="form-control" required>
+										</div>
+										
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="portion">
+										<label for="">* Whatsapp</label>
+										<div class="d-flex withForm">
+											<input type="text" value="<?php echo set_value('whatsapp_code', '+88'); ?>" class="form-control code" readonly name="whatsapp_code" id="">
+											<input type="text" name="student_whatsapp" placeholder="Whatsapp" value="<?php echo set_value('student_whatsapp'); ?>" class="form-control" required>
+										</div>
+									</div>
+								</div> 
+								<!-- <div class="col-md-6">
+									<div class="portion">
+										<label for="">* Imo Number</label>
+										<div class="d-flex withForm">
+											<input type="text" value="<?php echo set_value('telegram_code', '+88'); ?>" class="form-control code" readonly name="telegram_code" id="">
+											<input type="text" name="student_telegram" placeholder="Telegram" value="<?php echo set_value('student_telegram'); ?>" class="form-control" required>
+										</div>
+									</div>
+								</div> -->
+							</div> 
+							<div class="row">
+								
+							</div>
+							
+							<input type="hidden" name="refferal_code" value="<?php echo $refer_code; ?>" />
+							
+							
+							<div class="forgot d-flex align-items-center justify-content-between">
+								<input type="submit" class="btn btn-accent" value="Register">
+							</div>
+							<div class="register d-flex align-items-center text-center mt-5">
+								<p>Have account? <a href="<?php echo base_url('studentlogin') ;?>">Login Now</a></p>
+							</div>
+						</form>
+						<?php } else{ ?>
+						<p>Registration is disable without active student refer code. Please contact your trainer or team leader. </p>
+						<?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+<?php $this->load->view('front/footer'); ?>
+<script src="https://webhavenmedia.com/assets/js/app.js"></script>

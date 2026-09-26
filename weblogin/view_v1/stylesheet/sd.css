@@ -1,0 +1,185 @@
+.panel-body .table a {margin:1px 1px;}
+.tooltip-inner {
+     max-width: 100% !important;
+}
+.tabbable .nav-tabs {
+    text-align: center;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-bottom: 8px;
+    border-bottom: none;
+    position: relative;
+  }
+  .tabbable .nav-tabs::before {position: absolute; left: 0; right: 0; bottom: 0px; width: 80%; height: 2px; background:#bcd8ff; margin: 0 auto; content: "";}
+  .tabbable .nav-tabs .nav-item {
+    margin-bottom: -1px;
+    flex: 0 0 150px;
+    text-align: center;
+    line-height: 1.2; 
+  }
+  .tabbable .nav-tabs li a{color: #666; font-weight:600;position: relative; min-height: 60px;}
+  .tabbable .nav-tabs li a::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -16px;
+    width: 20px;
+    height: 20px;
+    background: #ddd;
+    margin: 0 auto;
+    content: "";
+    border-radius: 50%;
+    border: var(--text-color) 5px solid;
+  }
+  .tabbable .nav-tabs .nav-link.active::before {background: #005cb9;}
+  .tabbable .nav-tabs .nav-item.show .nav-link, .tabbable .nav-tabs .nav-link.active ,  .tabbable .nav-tabs .nav-link:hover {
+    color: #005cb9;
+    background-color:transparent;
+    border-color:transparent !important;
+  }
+  .tabbable .tab-content h5 {
+   margin-bottom: 8px; font-weight: 600; font-family:'Poppins SemiBold';
+  }
+  /*.btn.btn-default:hover {background-color: #ffa400;}*/
+  .btnss .btn {margin-left: 10px;}
+  .nav-item.active a , .total_text{color: #ffa400 !important;}
+  .total_text , .quentity_text{padding: 15px 0; font-size:17px; font-weight: 600;}
+  .quentity_text{color: #005cb9;}
+  .booking_text {
+    padding: 10px 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .style1 {font-size:15px; color: #666; text-align: center;}
+  .style1 td {vertical-align: middle;}
+  .style1 td:first-child {color: #ffa400;font-weight: 600;}
+   .style1 td:nth-child(5) span {width: 150px !important; text-align: center;font-weight: 600;font-size:16px;color: #005cb9;}
+  .style1 td i {color: #666;font-size:18px; margin-right: 10px;}
+
+  .dataTable .dropdown .dropdown-menu li a {
+    display: inline-block;
+    color: var(--text-color);
+    padding:2px 5px;
+}
+.dataTable .dropdown .dropdown-menu li a:hover { color:#333}
+.logo img {/* filter: brightness(0) invert(1); */}
+
+.pagination>li>a,
+.pagination>li>span {
+	color: var(--secondary-color-two);
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+	background-color:var(--primary-color);
+	 border-color:var(--primary-color);
+ }
+ .pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+    color:var(--secondary-color-two);
+}
+/* .btn-primary {
+	color:var(--text-color);
+	background-color:var(--primary-color) !important;
+	border-color: var(--primary-color) !important;
+} */
+.dangerText{color:var(--primary-color) !important;}
+.darkText {color:var(--primary-color2) !important;}
+.warningText {color:var(--primary-color3) !important;}
+.infoText {color:var(--primary-color4) !important}
+.successText {color:var(--primary-color5) !important;}
+.secondayText {color:var(--primary-color6) !important;}
+.generalText {color:var(--primary-color7) !important;}
+
+.dangerBg{background:var(--primary-color) !important; color: var(--text-color) !important;}
+.darkBg {background:var(--primary-color2) !important; color: var(--text-color) !important;}
+.warningBg {background:var(--primary-color3) !important; color: var(--primary-color2) !important;}
+.infoBg {background:var(--primary-color4) !important; color: var(--text-color) !important;}
+.successBg {background:var(--primary-color5) !important; color: var(--text-color) !important;}
+.secondayBg {background:var(--primary-color6) !important; color: var(--text-color) !important;}
+.generalBg {background:var(--primary-color7) !important; color: var(--text-color) !important;}
+.pagination>li>a, .pagination>li>span {
+    color:var(--secondary-color-two);
+}
+.nav>li>a:focus, .nav>li>a:hover {
+    background: var(--secondary-color-two);
+}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    background: var(--secondary-color-two);
+    border-color: var(--primary-dark-color);
+}
+
+.login .right-part	{height: calc(100vh - 0px); background:url(../image/login-banner.jpg) var(--primary-color) no-repeat top center; border-radius:0 0 0 20%; background-size: cover; display: flex; justify-content: center; align-items: center; position: relative; z-index: 1;}
+.login .right-part::before {position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); content: ""; border-radius:0 0 0 20%; z-index: -1;}
+#content.login {padding: 0px;}
+#content.login .form-group label {
+    position: absolute;
+    left: 47px;
+    top: -8px;
+    z-index: 0;
+    display: inline-block;
+    background: transparent;
+    padding: 0 5px;
+    width: auto;
+    z-index: 4;
+    text-align: left;
+}
+.wrap {max-width: 500px; margin: 0 auto; width: 100%;}
+.help-block {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 0;
+    color: #737373;
+}
+.autoLeft {width: auto; float: left;}
+.autoRight {width: auto; float: right;}
+.help-block a {color: var(--primary-color);}
+a {box-shadow: none !important;}
+.logfooter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 15px;
+}
+.designby {
+    position: relative;
+    top: -3px;
+    margin-left: 5px;
+    width: 43px;
+}
+.form-group.required .form-control {background-color: var(--light);}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 9999s ease-in-out 0s;
+}
+.d-flex{
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+} 
+.nav>li>a:focus, .nav>li>a:hover {
+  background: var(--secondary-color-two);
+}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+  background: var(--secondary-color-two);
+  border-color: var(--primary-dark-color);
+}
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+	background-color: var(--primary-color);
+	border-color: var(--primary-color);
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+	color: var(--secondary-color-two);
+}

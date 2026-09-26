@@ -1,0 +1,35 @@
+:root {
+    --primary-color: #1f540a;
+	--primary-dark-color: #0c2900; /* cyan-blue */
+	--primary-color2: #343a40; /* cyan-blue */
+    --primary-color3: #ffc107; /* shade of yellow */
+    --primary-color4: #17a2b8; /* bright cyan */
+    --primary-color5: #28a745; /* shade of green*/
+    --primary-color6: #6c757d; /* light grayish blue */
+    --primary-color7: #007bff; /* shade of cyan-blue */
+    --primary-color8: #f8f9fa; /* Ghost White */
+    --text-color: #fff; /* White */
+	--secondary-color-two: #276f0b;
+	--secondary-color-three: #103900;
+    --indigo: #e1ceff !important; 
+    --purple: #6f42c1 !important;
+    --pink: #b12b38 !important;
+    --red: #dc3545 !important;
+    --orange: #fd7e14 !important;
+    --yellow: #dda705 !important;
+    --green: #28a745 !important;
+    --teal: #20c997 !important;
+    --cyan: #208538 !important;
+    --gray: #6c757d !important;
+    --gray-dark: #343a40 !important;
+    --primary: #4b29f3 !important;
+    --secondary: #e1e1e2 !important;
+    --success: #28a745 !important;
+    --info: #17a2b8 !important;
+    --warning: #ffc107 !important;
+    --danger: #dc3545 !important;
+    --light: #f8f9fa !important;
+    --dark: #343a40 !important;
+    --disable:#e9ecef !important;
+}
+

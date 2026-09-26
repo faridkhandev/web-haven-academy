@@ -1,0 +1,210 @@
+<?php echo $header; ?>
+<?php echo $column_left; ?>
+<div id="content">
+	<div class="container-fluid">
+		<?php include 'view/template/common/message.tpl' ; ?>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="pull-left">
+					<h3 class="panel-title"><i class="fa fa-list"></i> <?php echo $text_list; ?></h3>
+				</div>
+				<div class="pull-right">
+					<button class="btn btn-warning btn-xs" id="btn-refresh" data-toggle="tooltip" data-placement="top" title="Refresh"><i class="fa fa-refresh"></i></button>
+					<button class="btn btn-primary btn-xs" id="btn-form"><i class="fa fa-filter"></i></button>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+				
+				<div class="well" id="well" style="display: none;">
+					<div class="row">
+						<form enctype="multipart/form-data" id="form-filter">
+							<div class="col-sm-3">
+								<div class="form-group">
+									<label class="control-label" for="input-user_no">Sub Admin ID</label>
+									<input type="text" name="filter_user_no" value="<?php echo $user_no;?>" id="input-user_no" class="form-control" />
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="form-group">
+									<label class="control-label" for="input-user_group">Sub Admin</label>
+									<select name="filter_user_group" id="input-user_group" class="form-control">
+									<option value=""></option>
+									<option value="11">Trainer</option>
+									<option value="12">Team Leader</option>
+									<option value="13">Senior Team Leader</option>
+									<option value="14">Teacher</option>
+									<option value="15">Counsellor</option>
+									</select>
+								</div>				
+							</div>
+							<div class="col-sm-3">
+								<div class="form-group">
+									<label class="control-label" for="input-transaction_no">Transaction no</label>
+									<input type="text" name="filter_transaction_no" value="" id="input-transaction_no" class="form-control" />
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="form-group">
+									<label class="control-label" for="input-date-added">Payment Date Added</label>
+									<div class="input-group date">
+									<input type="text" name="filter_date_added" value="" data-date-format="YYYY-MM-DD" id="input-date-added" class="form-control">
+									<span class="input-group-btn">
+									<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+									</span></div>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="form-group">
+									<label class="control-label" for="input-date-added">Payment Date Ended</label>
+									<div class="input-group date">
+									<input type="text" name="filter_date_ended" value="" data-date-format="YYYY-MM-DD" id="input-date-ended" class="form-control">
+									<span class="input-group-btn">
+									<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+									</span></div>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<button type="button" id="button-filter" class="btn btn-primary filterBtns pull-right"><i class="fa fa-search"></i> Filter</button>	
+							</div>
+						</form>
+					</div>
+				</div>
+				<form action="<?php echo $delete; ?>" method="post" enctype="multipart/form-data" id="form-user">
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered nowrap" id="table" width="100%">
+							<thead>
+								<tr>
+									<th style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></th>
+									<th class="text-left">ID</th>
+									<th class="text-left">Name</th>
+									<th class="text-left">Type</th>
+									<th class="text-left">Amount</th>
+									<th class="text-left">Withdrawal Point</th>
+									<th class="text-left">Rate</th>
+									<th class="text-left">Transaction Id</th>
+									<th class="text-left">Payment Medium</th>
+									<th class="text-left">Payment Date</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th style="width: 1px;" class="text-center"></th>
+									<th class="text-left">ID</th>
+									<th class="text-left">Name</th>
+									<th class="text-left">Type</th>
+									<th class="text-left">Amount</th>
+									<th class="text-left">Withdrawal Point</th>
+									<th class="text-left">Rate</th>
+									<th class="text-left">Transaction Id</th>
+									<th class="text-left">Payment Medium</th>
+									<th class="text-left">Payment Date</th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {	
+		var url = 'index.php?route=user/payment&token=<?php echo $token; ?>';
+		var tableExportColumns = [1,2,3,4,5,6,7,8,9];
+		var table = $('#table').DataTable({
+			"dom": "Bfrtip",
+			"searching": false,
+			"order": [],
+			"processing": false,
+			"serverSide": true,
+			"pageLength": <?php echo $page_length; ?>,
+			"lengthMenu": [[10,20,50,100, 250, 500, 750, 1000], [10,20,50,100, 250, 500, 750, 1000]],
+			"ajax": {
+				"url": url,
+				"type": "POST",
+				"data": function (data) {
+					var filter_user_no = $.trim($('input[name=\'filter_user_no\']').val());
+					if (filter_user_no) {
+						data.filter_user_no = filter_user_no;
+					}
+					
+					var filter_user_group = $.trim($('select[name=\'filter_user_group\']').val());
+					if (filter_user_group) {
+						data.filter_user_group = filter_user_group;
+					}
+					
+					var filter_transaction_no = $.trim($('input[name=\'filter_transaction_no\']').val());
+					if (filter_transaction_no) {
+						data.filter_transaction_no = filter_transaction_no;
+					}
+					
+					var filter_date_added = $.trim($('input[name=\'filter_date_added\']').val());
+					if (filter_date_added) {
+						data.filter_date_added = filter_date_added;
+					}
+					
+					var filter_date_ended = $.trim($('input[name=\'filter_date_ended\']').val());
+					if (filter_date_ended) {
+						data.filter_date_ended = filter_date_ended;
+					}
+				}
+			},
+			"columns": [
+				{"data": "id", "orderable": false, "searchable": false, "className": "text-center", "render": checkbox},
+				{"data": "user_no", "searchable": false},
+				{"data": "name", "searchable": false},
+				{"data": "user_group", "searchable": false},
+				{"data": "amount", "searchable": false},
+				{"data": "withdrawal_point", "searchable": false},
+				{"data": "conversion_rate", "searchable": false},
+				{"data": "transaction_id", "searchable": false},
+				{"data": "payment_medium", "searchable": false},
+				{"data": "payment_date", "searchable": false}
+			],
+			buttons: [
+				{extend: 'copy', text: '<i class="fa fa-files-o"></i>', titleAttr: 'Copy', exportOptions: {columns: tableExportColumns}},
+				{extend: 'print', className: 'btn-info', text: '<i class="fa fa-print"></i>', titleAttr: 'Print', exportOptions: {columns: tableExportColumns}},
+				{extend: 'excel', className: 'btn-success', text: '<i class="fa fa-file-excel-o"></i>', titleAttr: 'Excel', exportOptions: {columns: tableExportColumns}},
+				{extend: 'pdf', className: 'btn-danger', text: '<i class="fa fa-file-text-o"></i>', titleAttr: 'PDF', exportOptions: {columns: tableExportColumns}},
+				{extend: 'pageLength', className: 'btn-primary'},
+			]
+		});
+		
+		$('#btn-refresh').on('click', function() {
+			$('#form-filter')[0].reset();
+			table.order([]).ajax.reload();
+		});
+		
+		$('#button-filter').on('click', function() {
+			table.ajax.reload();
+		});
+		
+		$('#button-search').on('click', function() {
+			table.ajax.reload();
+		});
+		
+		$('#button-reset-filter').on('click', function() {
+			location.reload();
+		});
+		
+		$('#btn-form').on('click', function() {
+			$('#well').stop().slideToggle('fast', 'linear');
+		});
+		
+		
+		$('.date').datetimepicker({
+			pickTime: false,
+			maxDate: moment()
+		});
+	});
+	</script>
+	<script type="text/javascript"><!--
+	$('.date').datetimepicker({
+	pickTime: false
+	});
+	$('.select2').select2();
+	//--></script>
+<?php echo $footer; ?> 

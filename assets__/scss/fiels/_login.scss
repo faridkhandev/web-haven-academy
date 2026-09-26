@@ -1,0 +1,83 @@
+.login_form_wrapper{
+    width: 100%;
+    height: 100vh;
+    background-image: url(../images/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    &:after{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        background-color: rgba(255,255,255,.3);
+    }
+    img{
+        width: 15rem;
+        display: block;
+        margin: auto;
+        margin-bottom: 1rem;
+    }
+    .main_wrapper{
+        box-shadow: rgba(0,0,0,.1) 1px 0 20px;
+        max-width: 576px;
+        padding: 2rem;
+        position: relative;
+        z-index: 2;
+        background-color: rgba(255, 255, 255, 0.8);
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        border-radius: 5px;
+        .portion{
+            margin-bottom: 0;
+        }
+        label{
+            margin-bottom: 5px;
+            color: var(--primaryColor);
+            
+        }
+        .form-control{
+            height: 40px;
+            font-size: 14px;
+            background-color: rgba(255,255,255,.2);
+            &::placeholder{
+                font-size: 14px;
+            }
+        }
+        .btn{
+            font-size: 16px;
+            color: var(--whiteColor);
+            transition: all .5s ease-in;
+            &:hover{
+                background-color: var(--secondaryColor);
+            }
+        }
+    }
+}
+
+.withForm{
+    .code{
+        width: 40px;
+        border-right: 0;
+    }
+}
+
+.form-control{
+    appearance: auto !important;
+    -webkit-appearance: auto !important;
+    -moz-appearance: auto !important;
+}
+
+@media only screen and (max-width:500px){
+    .login_form_wrapper{
+        &.register{
+            height: auto;
+        }
+        .main_wrapper{
+            max-width: 90%;
+        }
+
+        
+    }
+}

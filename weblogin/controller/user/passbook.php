@@ -1,0 +1,217 @@
+<?php
+class ControllerUserPassbook extends Controller {
+	private $error = array();
+	
+	public function __construct($params) {
+		parent::__construct($params);
+		$this->load->model('user/passbook');
+		$this->load->model('user/user');
+		$this->load->language('user/passbook');
+	}
+	
+	public function index() {
+		$this->document->setTitle($this->language->get('heading_title'));
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && (strtolower($this->request->server['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')) {
+			$this->response->addHeader('Content-Type: application/json');
+			$this->response->setOutput(json_encode($this->getItems()));
+		} else {
+			$this->getList();
+		}
+	}
+	
+	private function getItems() {
+		if (isset($this->request->post['filter_user_id'])) {
+			$filter_user_id = $this->request->post['filter_user_id'];
+		} else {
+			$filter_user_id = null;
+		}
+		
+		if (isset($this->request->post['filter_reason'])) {
+			$filter_reason = $this->request->post['filter_reason'];
+		} else {
+			$filter_reason = null;
+		}
+		
+		if (isset($this->request->post['filter_search'])) {
+			$filter_search = $this->request->post['filter_search'];
+		} else {
+			$filter_search = null;
+		}
+		
+		if (isset($this->request->post['filter_type'])) {
+			$filter_type = $this->request->post['filter_type'];
+		} else {
+			$filter_type = null;
+		}
+		
+		if (isset($this->request->post['filter_date_added'])) {
+			$filter_date_added = $this->request->post['filter_date_added'];
+		} else {
+			$filter_date_added = null;
+		}
+		
+		if (isset($this->request->post['filter_date_ended'])) {
+			$filter_date_ended = $this->request->post['filter_date_ended'];
+		} else {
+			$filter_date_ended = null;
+		}
+		
+		if (isset($this->request->post['order'])) {
+			$order = $this->request->post['order'];
+		} else {
+			$order = NULL;
+		}
+
+		if (isset($this->request->post['start'])) {
+			$start = $this->request->post['start'];
+		} else {
+			$start = 0;
+		}
+
+		if (isset($this->request->post['length'])) {
+			$length = $this->request->post['length'];
+		} else {
+			$length = $this->config->get('config_limit_admin');
+		}
+
+		$filter_data = [
+			'filter_search'              => $filter_search,
+			'filter_user'              => $filter_user_id,
+			'filter_reason'              => $filter_reason,
+			'filter_type'              => $filter_type,
+			'filter_date_added'              => $filter_date_added,
+			'filter_date_ended'              => $filter_date_ended,
+			'order'   				=> $order,
+			'start'   				=> $start,
+			'length'   				=> $length
+		];
+
+		$items = array();
+		$results = $this->model_user_passbook->getItems($filter_data);
+		
+		foreach($results['result'] as $key => $result) {
+			$items[] = array(
+				'id' => $result['id'],
+				'reason' => $result['reason'],
+				'description'   => $result['description'],
+				'credit_point'   => $result['credit_point'],
+				'debit_point'   => $result['debit_point'],
+				'balance_point'   => $result['balance_point'],
+				'created_at'			=>	date($this->config->get('config_date_format'), strtotime($result['created_at'])),
+				'action'				=>	$result['id']
+			);
+		}
+
+		$json = array(
+			'draw'				=>	(int)$this->request->post['draw'],
+			'recordsTotal'		=>	$results['recordsTotal'],
+			'recordsFiltered'	=>	$results['recordsFiltered'],
+			'data'				=>	$items,
+		);
+
+		return $json;
+	}
+
+	protected function getList() {
+		$data['breadcrumbs'] = array();
+
+		$data['breadcrumbs'][] = array(
+			'text' => $this->language->get('text_home'),
+			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+		);
+
+		$data['breadcrumbs'][] = array(
+			'text' => 'User Passbook',
+			'href' => $this->url->link('user/passbook', 'token=' . $this->session->data['token'] . $url, 'SSL')
+		);
+
+
+		$data['heading_title'] = $this->language->get('heading_title');
+		$data['token'] = $this->session->data['token'];
+		
+		$data['text_list'] = $this->language->get('text_list');
+		$data['text_no_results'] = $this->language->get('text_no_results');
+		$data['text_confirm'] = $this->language->get('text_confirm');
+
+		$data['column_username'] = $this->language->get('column_username');
+		$data['column_status'] = $this->language->get('column_status');
+		$data['column_date_added'] = $this->language->get('column_date_added');
+		$data['column_action'] = $this->language->get('column_action');
+
+		$data['button_add'] = $this->language->get('button_add');
+		$data['button_edit'] = $this->language->get('button_edit');
+		$data['button_delete'] = $this->language->get('button_delete');
+
+		if (isset($this->error['warning'])) {
+			$data['error_warning'] = $this->error['warning'];
+		} else {
+			$data['error_warning'] = '';
+		}
+
+		if (isset($this->session->data['success'])) {
+			$data['success'] = $this->session->data['success'];
+
+			unset($this->session->data['success']);
+		} else {
+			$data['success'] = '';
+		}
+
+		if (isset($this->request->post['selected'])) {
+			$data['selected'] = (array)$this->request->post['selected'];
+		} else {
+			$data['selected'] = array();
+		}
+		$data['user_id'] = $this->user->getId();
+		$data['current_user_id'] = $this->request->get['id'];
+		$data['user_group_id'] = $this->user->getGroupId();
+		
+		$data['page_length'] = $this->config->get('config_limit_admin');
+		
+		$user_info = $this->model_user_user->get($this->request->get['id']);
+		$point = $this->model_user_user->getUserPoint($this->request->get['id']);
+		$data['point'] = $point;
+		$data['user_info'] = $user_info;
+		$data['text_form'] = !isset($this->request->get['id']) ? 'Passbook' : 'View Passbook '.'(<div class="miltiInfo"><span>Id:'.$this->request->get['id'].'</span>||<span>No:'.$user_info['user_no'].'</span>||<span>Name:'.$user_info['firstname'].' '.$user_info['lastname'].'</span>||<span>Balance Point:'.$point.'</span></div>)';
+		
+		$data['header'] = $this->load->controller('common/header');
+		$data['column_left'] = $this->load->controller('common/column_left');
+		$data['footer'] = $this->load->controller('common/footer');
+
+		$this->response->setOutput($this->load->view('user/passbook_list.tpl', $data));
+	}
+	
+	public function deductpoint(){
+		$json = array();
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && (strtolower($this->request->server['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')) {
+			if(empty($_POST['user_id'])){
+				$json['error'] = 'Not a valid request. Try again';
+			}
+			
+			if(empty($_POST['point'])){
+				$json['error'] = 'Please add point';
+			}
+			
+			if(empty($_POST['reason'])){
+				$json['error'] = 'Please add valid reason';
+			}
+			
+			if (!isset($json['error'])) {	
+				$point = $this->model_user_user->getUserPoint($_POST['user_id']);
+				
+				if($_POST['point']>$point){
+					$json['error'] = 'Deduct point is greater than balance point';
+				}
+				if(empty($json['error'])){
+					$passbook_id = $this->model_user_passbook->add(array('user_id'=>$_POST['user_id'], 'reason'=>$_POST['reason'], 'description'=>$_POST['comment'], 'credit_point'=>0, 'debit_point'=>$_POST['point'], 'type'=>'Debit'));
+					if($passbook_id){
+						$json['success'] = 'Point successfully debited from passbook.';
+					}else{
+						$json['error'] = 'Point did not debited from passbook due to system error. Try again';
+					}
+				}
+			}
+		}
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}
+}

@@ -1,0 +1,42 @@
+<?php
+//Text
+$_['text_dashboard']                   = 'Dashboard';
+$_['text_item_management']             = 'Dog Management';
+$_['text_item_list']              	   = 'Dog List';
+$_['text_booking']              	   = 'Advance Booking';
+$_['text_online_booking']              = 'Online Booking';
+$_['text_monthly_bill']                = 'Bill Generate';
+$_['text_boarding']              	   = 'Boarding Management';
+$_['text_check_in']              	   = 'Boarding Entry';
+$_['text_check_out']              	   = 'Check out';
+$_['text_invoice']              	   = 'Manage Invoice';
+$_['text_custom_field']                = 'Custom Fields';
+$_['text_custom_field_group']          = 'Custom Field Groups';
+$_['text_customer']                    = 'Customers';
+$_['text_user_management']             = 'User Management';
+$_['text_user']                        = 'Users';
+$_['text_user_profile']                = 'User Profile';
+$_['text_user_groups']                 = 'User Groups';
+$_['text_settings']                    = 'Site Settings';
+$_['text_language']                    = 'Languages';
+$_['text_backup']                      = 'Backup';
+$_['text_contact']                     = 'Mail Management';
+$_['text_error_log']                   = 'Error Log';
+$_['text_expense']                     = 'Expenses';
+$_['text_expense_head']                = 'Expenses Head';
+$_['text_reports']                     = 'Reports';
+$_['text_boarding_details']            = 'Boarding Details';
+$_['text_advance_booking']             = 'Advance Booking';
+$_['text_accountant']                  = 'Revenue and Expenses';
+$_['text_vaccination']                 = 'Vaccination';
+$_['text_consolidated_invoice']        = 'Consolidate Invoice';
+
+/* Service Management */
+$_['text_service_management']        	= 'Grooming Management';
+$_['text_service']        			 	= 'Services';
+$_['text_package']        				= 'Packages';
+$_['text_package_category']        		= 'Package Category';
+$_['text_voucher']        				= 'Vouchers';
+$_['text_pickup']        				= 'Pickup';
+$_['text_dropoff']        				= 'Dropoff';
+$_['text_service_booking']        		= 'Grooming Booking';

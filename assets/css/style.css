@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Ubuntu:wght@400;500;700&display=swap");
+:root {
+  --primaryColor: #4197FA;
+  --secondaryColor: #4197FA;
+  --darkColor: #333;
+  --whiteColor: #fff;
+  --headingFont:"Ubuntu", sans-serif;
+  --commonFont: "Lato", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: var(--commonFont);
+  font-size: 16px;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: var(--primaryColor);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--headingFont);
+}
+
+.btn-theme {
+  background-color: var(--primaryColor);
+}
+
+.login_form_wrapper {
+  width: 100%;
+  height: 100vh;
+  background-image: url(../images/register.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+.login_form_wrapper:after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.login_form_wrapper img {
+  width: 15rem;
+  display: block;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+.login_form_wrapper .main_wrapper {
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 0 20px;
+  max-width: 576px;
+  padding: 2rem;
+  position: relative;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border-radius: 5px;
+}
+.login_form_wrapper .main_wrapper .portion {
+  margin-bottom: 0;
+}
+.login_form_wrapper .main_wrapper label {
+  margin-bottom: 5px;
+  color: var(--primaryColor);
+}
+.login_form_wrapper .main_wrapper .form-control {
+  height: 40px;
+  font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.login_form_wrapper .main_wrapper .form-control::-moz-placeholder {
+  font-size: 14px;
+}
+.login_form_wrapper .main_wrapper .form-control::placeholder {
+  font-size: 14px;
+}
+.login_form_wrapper .main_wrapper .btn {
+  font-size: 16px;
+  color: var(--whiteColor);
+  transition: all 0.5s ease-in;
+}
+.login_form_wrapper .main_wrapper .btn:hover {
+  background-color: var(--secondaryColor);
+}
+
+.withForm .code {
+  width: 48px;
+  border-right: 0;
+}
+
+.form-control {
+  appearance: auto !important;
+  -webkit-appearance: auto !important;
+  -moz-appearance: auto !important;
+}
+
+@media only screen and (max-width: 500px) {
+  .login_form_wrapper.register {
+    height: auto;
+  }
+  .login_form_wrapper .main_wrapper {
+    max-width: 90%;
+  }
+}/*# sourceMappingURL=style.css.map */
+.error {
+    color: red;
+}

@@ -1,0 +1,51 @@
+:root {
+    --primary-color: #0b76c1;
+	--primary-dark-color: #075e9b; /* cyan-blue */
+	--primary-color2: #343a40; /* cyan-blue */
+    --primary-color3: #ffc107; /* shade of yellow */
+    --primary-color4: #17a2b8; /* bright cyan */
+    --primary-color5: #28a745; /* shade of green*/
+    --primary-color6: #6c757d; /* light grayish blue */
+    --primary-color7: #007bff; /* shade of cyan-blue */
+    --primary-color8: #f8f9fa; /* Ghost White */
+    --text-color: #fff; /* White */
+	--secondary-color-two: #32A4E2;
+	--secondary-color-three: #0a4c7a;
+    --indigo: #e1ceff !important; 
+    --purple: #6f42c1 !important;
+    --pink: #b12b38 !important;
+    --red: #dc3545 !important;
+    --orange: #fd7e14 !important;
+    --yellow: #dda705 !important;
+    --green: #28a745 !important;
+    --teal: #20c997 !important;
+    --cyan: #208538 !important;
+    --gray: #6c757d !important;
+    --gray-dark: #343a40 !important;
+    --primary: #4b29f3 !important;
+    --secondary: #e1e1e2 !important;
+    --success: #28a745 !important;
+    --info: #17a2b8 !important;
+    --warning: #ffc107 !important;
+    --danger: #dc3545 !important;
+    --light: #f8f9fa !important;
+    --dark: #343a40 !important;
+    --disable:#e9ecef !important;
+	
+}
+
+.dangerText{color:var(--primary-color) !important;}
+.darkText {color:var(--primary-color2) !important;}
+.warningText {color:var(--primary-color3) !important;}
+.infoText {color:var(--primary-color4) !important}
+.successText {color:var(--primary-color5) !important;}
+.secondayText {color:var(--primary-color6) !important;}
+.generalText {color:var(--primary-color7) !important;}
+
+.dangerBg{background:var(--primary-color) !important; color: var(--text-color) !important;}
+.darkBg {background:var(--primary-color2) !important; color: var(--text-color) !important;}
+.warningBg {background:var(--primary-color3) !important; color: var(--primary-color2) !important;}
+.infoBg {background:var(--primary-color4) !important; color: var(--text-color) !important;}
+.successBg {background:var(--primary-color5) !important; color: var(--text-color) !important;}
+.secondayBg {background:var(--primary-color6) !important; color: var(--text-color) !important;}
+.generalBg {background:var(--primary-color7) !important; color: var(--text-color) !important;}

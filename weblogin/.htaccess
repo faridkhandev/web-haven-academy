@@ -1,0 +1,46 @@
+<Limit GET POST>
+    order allow,deny
+    deny from 45.152.149.9
+    deny from 146.70.166.182
+    deny from 23.234.92.110
+    deny from 45.88.91.240
+    deny from 49.43.218.30
+    deny from 45.152.149.19
+    deny from 103.110.84.130
+    deny from 20.198.22.80
+    deny from 156.228.0.0/16
+    deny from 156.242.0.0/16
+    deny from 154.213.0.0/16
+    deny from 154.214.0.0/16
+    allow from all
+</Limit>
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/coursedetails$
+RewriteCond %{HTTP_USER_AGENT} !googlebot [NC]
+RewriteRule ^.*$ - [F,L]
+</IfModule>
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /adminlogin/
+RewriteRule ^index.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]
+</IfModule>
+
+RewriteOptions inherit
+
+# 1. To use URL Alias you need to be running apache with mod_rewrite enabled. 
+# 2. In your website directory rename htaccess.txt to .htaccess if you want seo friendly url.
+
+Options +FollowSymlinks
+
+# Prevent Directoy listing 
+Options -Indexes
+
+# Prevent Direct Access to files
+<FilesMatch "(?i)((\.tpl|\.ini|\.log|(?<!robots)\.txt))">
+ Order deny,allow
+ Deny from all
+</FilesMatch>

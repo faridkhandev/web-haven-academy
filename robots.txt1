@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: 
+Disallow: /cgi-bin/
+Disallow: /webadmin/
+Sitemap: https://www.kosdigital.in/sitemap.xml
