@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ForgotController;
+use App\Http\Controllers\AboutController;
+Route::get('/about',[AboutController::class,'index'])->name('about');
 Route::get('/courses',[CoursesController::class,'index'])->name('courses');
 Route::get('/register',[RegisterController::class,'index'])->name('register');
 Route::post('/register',[RegisterController::class,'store'])->name('register.store');
