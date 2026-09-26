@@ -1,6 +1,7 @@
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AdminStudentController;
 <?php
 use App\Http\Controllers\StudentLoginController;
 use App\Http\Controllers\StudentWelcomeController;
@@ -81,3 +82,8 @@ Route::post('/admin/users', [AdminUserController::class, 'store'])->name('admin.
 Route::get('/admin/users/{user}/edit', [AdminUserController::class, 'edit'])->name('admin.users.edit');
 Route::put('/admin/users/{user}', [AdminUserController::class, 'update'])->name('admin.users.update');
 Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
+
+Route::get('/admin/students', [AdminStudentController::class, 'index'])->name('admin.students.index');
+Route::get('/admin/students/{student}/edit', [AdminStudentController::class, 'edit'])->name('admin.students.edit');
+Route::put('/admin/students/{student}', [AdminStudentController::class, 'update'])->name('admin.students.update');
+Route::post('/admin/students/{student}/block', [AdminStudentController::class, 'block'])->name('admin.students.block');
