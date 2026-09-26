@@ -1,7 +1,7 @@
 <?php
-namespace AppHttpControllers;
-use IlluminateHttpRequest;
-use IlluminateSupportFacadesDB;
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 class AdminUserFinanceController extends Controller {
  private function guard(Request $r):void{abort_unless($r->session()->has('admin_user_id')&&(int)$r->session()->get('admin_user_group_id')===1,403);}
  private function users(){return DB::table('bh_user as u')->leftJoin('bh_user_extra as e','e.user_id','=','u.user_id')->leftJoin('bh_user_group as g','g.user_group_id','=','u.user_group_id')->select('u.user_id','u.firstname','u.lastname','u.username','e.user_no','g.name as user_group')->orderBy('u.user_id','desc');}
