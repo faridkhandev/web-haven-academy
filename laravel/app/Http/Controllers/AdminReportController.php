@@ -1,7 +1,7 @@
 <?php
-namespace AppHttpControllers;
-use IlluminateHttpRequest;
-use IlluminateSupportFacadesDB;
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 class AdminReportController extends Controller {
  private function guard(Request $r):void{abort_unless($r->session()->has('admin_user_id')&&(int)$r->session()->get('admin_user_group_id')===1,403);}
  public function students(Request $r){
