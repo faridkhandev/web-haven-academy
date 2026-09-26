@@ -1,29 +1,53 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome | Student Panel - Web Haven Media</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Welcome | Student Panel</title>
+<style>
+body{margin:0;background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:#fff;font-family:Arial,sans-serif}
+.wrap{max-width:1100px;margin:auto;padding:28px 18px}.card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:20px;margin:14px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.btn{display:inline-block;padding:10px 16px;border-radius:999px;background:#ffc107;color:#111;text-decoration:none;font-weight:700}.muted{opacity:.75}.img{width:100%;height:210px;object-fit:cover;border-radius:12px}.pill{font-weight:800;color:#ffc107}
+</style>
 </head>
-<body class="bg-dark text-white">
-<div class="container py-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div><h1>Welcome, {{ $student->student_name }}</h1><p class="text-white-50 mb-0">Web Haven Media Student Panel</p></div>
-        <a class="btn btn-warning" href="{{ url('/student/dashboard') }}">Student Profile</a>
-    </div>
+<body><div class="wrap">
+<div class="card" style="display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;align-items:center">
+<div><h1>Welcome to Student Panel</h1><div class="muted">Web Haven Media • Learn • Grow • Earn</div></div>
+<div><a class="btn" href="{{ route('student.dashboard') }}">Student Profile</a>
+<a class="btn" target="_blank" href="https://www.facebook.com/profile.php?id=100094887172397">Teacher FB</a></div></div>
 
-    @if ((int) $student->student_status === 1)
-        <div class="row g-3">
-            <div class="col-md-6"><div class="card bg-secondary text-white p-3"><h5>Help line</h5><p>Support & assistance</p>@if($helpline_link)<a class="btn btn-warning" href="{{ $helpline_link }}">Click Here</a>@endif</div></div>
-            <div class="col-md-6"><div class="card bg-secondary text-white p-3"><h5>Town hall Meeting</h5><p>Company updates & Q/A</p>@if($townhall_link)<a class="btn btn-warning" href="{{ $townhall_link }}">Click Here</a>@endif</div></div>
-        </div>
+@if((int)$student->student_status===1)
+<div class="card"><h2>Your Growth Hub</h2><p class="muted">Access courses, updates, performers, meetings, gallery and support.</p>
+<a class="btn" href="{{ route('student.course') }}">Our Course</a></div>
 
-        <div class="mt-4"><h3>Notifications</h3>
-            @forelse($notifications as $notification)<div class="alert alert-info">{{ $notification->title ?? $notification->description ?? 'New notification' }}</div>@empty<p class="text-white-50">No notifications.</p>@endforelse
-        </div>
-    @else
-        <div class="alert alert-info">Your account is awaiting activation.</div>
-    @endif
+<div class="grid">
+<div class="card"><h3>Help line</h3><p class="muted">Support & assistance</p>@if($helpline_link)<a class="btn" href="{{ $helpline_link }}">Click Here</a>@else<span class="muted">Upcoming</span>@endif</div>
+<div class="card"><h3>Town hall Meeting</h3><p class="muted">Company updates & Q/A</p>@if($townhall_link)<a class="btn" href="{{ $townhall_link }}">Click Here</a>@else<span class="muted">Upcoming</span>@endif</div>
 </div>
-</body>
-</html>
+
+@if($notifications->count())<div class="card"><h2 class="pill">Notifications</h2>@foreach($notifications as $n)<div style="padding:12px 0;border-bottom:1px solid #ffffff22">{{ $n->notifcation ?? $n->notification ?? '' }}</div>@endforeach</div>@endif
+
+@if($daily->count())<div class="card"><h2 class="pill">Daily Best Performer</h2><div class="grid">@foreach($daily as $item)<div><img class="img" src="https://webhavenmedia.com/weblogin/image/{{ $item->entity_image }}" alt=""><h3>{{ $item->entity_name }}</h3><div class="muted">{{ strtoupper($item->type) }} • {{ $item->entity_no }}</div><p class="muted">{{ $item->entity_description }}</p></div>@endforeach</div></div>@endif
+
+@if($week_student)<div class="card"><h2 class="pill">Weekly Best Performer</h2><img class="img" src="https://webhavenmedia.com/weblogin/image/{{ $week_student->entity_image }}" alt=""><h3>{{ $week_student->entity_name }}</h3><p class="muted">{{ $week_student->entity_description }}</p></div>@endif
+
+<div class="card"><h2 class="pill">My Team</h2><div class="grid">
+@foreach([['My Trainer',$mytrainer],['My Team Leader',$mytl],['My STL',$mystl]] as [$label,$person])
+@if($person)<div><h3>{{ $label }}</h3><p>{{ $person->firstname }} {{ $person->lastname }}</p>@if($person->whatsapp)<a class="btn" target="_blank" href="https://api.whatsapp.com/send?phone={{ $person->whatsapp }}">WhatsApp</a>@endif</div>@endif
+@endforeach
+</div></div>
+@endif
+
+@if($photos)<div class="card"><h2 class="pill">Photo Zoon</h2><div class="grid">@foreach($photos as $photo)<a target="_blank" href="{{ $photo }}"><img class="img" src="{{ $photo }}" alt="photo"></a>@endforeach</div></div>@endif
+
+@if((int)$student->student_status===1)
+<div class="card"><h2 class="pill">Weekly Leaders</h2><div class="grid">
+@foreach([['Weekly Best Trainer',$week_trainer],['Weekly Best TL',$week_teamleader]] as [$label,$item])
+@if($item)<div><h3>{{ $label }}</h3><img class="img" src="https://webhavenmedia.com/weblogin/image/{{ $item->entity_image }}" alt=""><strong>{{ $item->entity_name }}</strong><p class="muted">{{ $item->entity_description }}</p></div>@endif
+@endforeach</div></div>
+
+@if($weekly_activity->count())<div class="card"><h2 class="pill">Weekly Activity</h2><div class="grid">@foreach($weekly_activity as $item)<div><h3>{{ $item->name }}</h3><p class="muted">{{ $item->description }}</p></div>@endforeach</div></div>@endif
+
+<div class="card"><h2 class="pill">Motivational Speech</h2>@if($motivational_link)<a class="btn" href="{{ $motivational_link }}">Click Here</a>@else<span class="muted">Upcoming</span>@endif</div>
+@else
+<div class="card"><h2>Account awaiting activation</h2><p class="muted">Complete activation from your Student Profile when eligible.</p></div>
+@endif
+</div></body></html>
