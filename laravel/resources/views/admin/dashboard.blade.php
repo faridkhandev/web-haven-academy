@@ -8,7 +8,7 @@ body{margin:0;background:#f5f7fb;font-family:Arial,sans-serif;color:#1f2937}.wra
 </style></head>
 <body><div class="wrap">
 <div class="top"><div><h1>Admin Dashboard</h1><div class="muted">Web Haven Academy</div></div>
-<div><a href="{{ route('admin.users.index') }}">Users</a> &nbsp; <a href="{{ route('admin.permissions.index') }}">Permissions</a> &nbsp; <a href="{{ route('admin.settings.index') }}">Settings</a> &nbsp; <a href="{{ route('admin.pointbuysell.index') }}">Point Buy/Sell</a> &nbsp; <a href="{{ route('admin.reports.students') }}">Reports</a> &nbsp; <a href="{{ route('admin.attendance.student') }}">Attendance</a> &nbsp; <form style="display:inline" method="POST" action="{{ route('admin.logout') }}">@csrf<button class="logout">Logout</button></form></div></div>
+<div><a href="{{ route('admin.users.index') }}">Users</a> &nbsp; <a href="{{ route('admin.permissions.index') }}">Permissions</a> &nbsp; <a href="{{ route('admin.settings.index') }}">Settings</a> &nbsp; <a href="{{ route('admin.userfinance.passbook') }}">User Finance</a> &nbsp; <a href="{{ route('admin.pointbuysell.index') }}">Point Buy/Sell</a> &nbsp; <a href="{{ route('admin.reports.students') }}">Reports</a> &nbsp; <a href="{{ route('admin.attendance.student') }}">Attendance</a> &nbsp; <form style="display:inline" method="POST" action="{{ route('admin.logout') }}">@csrf<button class="logout">Logout</button></form></div></div>
 <div class="grid">
 <div class="card"><div class="muted">Today's New Leads</div><div class="num">{{ $todayLeads }}</div></div>
 <div class="card"><div class="muted">Active Students</div><div class="num">{{ $activeStudents }}</div></div>
