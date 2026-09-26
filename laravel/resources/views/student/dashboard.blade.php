@@ -49,5 +49,51 @@
         <a class="btn" href="{{ route('student.welcome') }}">Student Home</a>
     </div>
 </div>
+
+@if ((int)$student->student_status === 0 && (float)($student->student_point ?? 0) >= (float)($activation_point ?? 0))
+<div class="card">
+    <strong>Activation available:</strong>
+    You have enough points to activate your account.
+    <form method="POST" action="{{ route('student.profile.active') }}" style="margin-top:12px">
+        @csrf
+        <button class="btn" type="submit">Account Activation Request</button>
+    </form>
+</div>
+@endif
+
+@if ((int)$student->student_status === 1)
+<div class="grid">
+    <div class="card">
+        <div class="label">Referral</div>
+        <p class="muted">Share your referral link via WhatsApp.</p>
+        <a class="btn" target="_blank" href="https://api.whatsapp.com/send?text={{ urlencode($student->refer_link ?? '') }}">New Refer Request</a>
+    </div>
+    <div class="card">
+        <div class="label">Copy Referral Link</div>
+        <input id="copyText" value="{{ $student->refer_link ?? '' }}" readonly style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd">
+        <button class="btn" type="button" id="copyButton" style="margin-top:10px">Copy</button>
+    </div>
+</div>
+<div class="card">
+    <div class="label">Active Student Group</div>
+    <p class="muted">Join the official WhatsApp group for active students.</p>
+    <a class="btn" target="_blank" href="https://chat.whatsapp.com/EtDN0714YFeBekqpss0hrQ">Join Now</a>
+</div>
+@endif
+
+<script>
+document.getElementById('copyButton')?.addEventListener('click', async function () {
+    const input = document.getElementById('copyText');
+    try {
+        await navigator.clipboard.writeText(input.value);
+        alert('Referral link copied.');
+    } catch (e) {
+        input.select();
+        document.execCommand('copy');
+        alert('Referral link copied.');
+    }
+});
+</script>
+
 </body>
 </html>
