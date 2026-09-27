@@ -1,4 +1,7 @@
 <?php
-use Illuminate\Foundation\Inspiring;
+
 use Illuminate\Support\Facades\Artisan;
-Artisan::command('inspire', function () { $this->comment(Inspiring::quote()); })->purpose('Display an inspiring quote');
+
+Artisan::command('about:app', function () {
+    $this->comment(config('app.name').' Laravel application');
+})->purpose('Display application information');
