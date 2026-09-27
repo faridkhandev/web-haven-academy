@@ -87,7 +87,6 @@ class ControllerCommonMenu extends Controller {
 		$data['payment'] = $this->url->link('module/payment', 'token=' . $this->session->data['token'], 'SSL');
 		$data['controllerstudent'] = $this->url->link('module/controllerstudent', 'token=' . $this->session->data['token'], 'SSL');
 		$data['assignstudent'] = $this->url->link('module/assignstudent', 'token=' . $this->session->data['token'], 'SSL');
-		$data['addmeeting'] = $this->url->link('module/session/add', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$data['attendance'] = $this->url->link('module/attendance', 'token=' . $this->session->data['token'], 'SSL');
 		$data['allattendance'] = $this->url->link('module/allattendance', 'token=' . $this->session->data['token'], 'SSL');
