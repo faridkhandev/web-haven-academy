@@ -1,86 +1,72 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Student Dashboard</title>
-    <style>
-        body{font-family:Arial,sans-serif;background:#0f2027;color:#fff;margin:0}
-        .wrap{max-width:1100px;margin:0 auto;padding:40px 20px}
-        .top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-        .card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:24px;margin-top:20px}
-        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-        .label{font-size:12px;text-transform:uppercase;opacity:.7}.value{font-size:20px;font-weight:700;margin-top:7px}
-        .badge{padding:8px 14px;border-radius:999px;font-weight:700;background:#ffc107;color:#111}
-        .badge.active{background:#28a745;color:#fff}.btn{display:inline-block;padding:10px 16px;border-radius:10px;background:#ffc107;color:#111;text-decoration:none;font-weight:700}
-        .muted{opacity:.75}
-    </style>
-</head>
-<body>
-<div class="wrap">
-    <div class="top">
+@extends('layouts.student')
+
+@section('title', 'Dashboard')
+
+@section('content')
+<div class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap">
         <div>
             <div class="muted">Student Dashboard</div>
             <h1>{{ $student->student_name }}</h1>
         </div>
-        <span class="badge {{ (int)$student->student_status === 1 ? 'active' : '' }}">
+        <span class="btn {{ (int)$student->student_status === 1 ? '' : 'btn-secondary' }}">
             {{ (int)$student->student_status === 1 ? 'ACTIVE' : 'INACTIVE' }}
         </span>
     </div>
+</div>
 
-    <div class="card">
-        <div class="grid">
-            <div><div class="label">Student No</div><div class="value">{{ $student->student_no }}</div></div>
-            <div><div class="label">Email</div><div class="value">{{ $student->student_email }}</div></div>
-            <div><div class="label">Phone</div><div class="value">{{ $student->student_phone }}</div></div>
-            <div><div class="label">City</div><div class="value">{{ $student->student_city ?: 'Not set' }}</div></div>
-            <div><div class="label">Trainer</div><div class="value">{{ trim(($student->firstname ?? '').' '.($student->lastname ?? '')) ?: 'Not assigned' }}</div></div>
-            <div><div class="label">Team Leader</div><div class="value">{{ trim(($student->tl_firstname ?? '').' '.($student->tl_lastname ?? '')) ?: 'Not assigned' }}</div></div>
-        </div>
-    </div>
+<div class="grid">
+    <div class="card"><div class="muted">Student No</div><strong>{{ $student->student_no }}</strong></div>
+    <div class="card"><div class="muted">Email</div><strong>{{ $student->student_email }}</strong></div>
+    <div class="card"><div class="muted">Phone</div><strong>{{ $student->student_phone }}</strong></div>
+    <div class="card"><div class="muted">City</div><strong>{{ $student->student_city ?: 'Not set' }}</strong></div>
+    <div class="card"><div class="muted">Trainer</div><strong>{{ trim(($student->firstname ?? '').' '.($student->lastname ?? '')) ?: 'Not assigned' }}</strong></div>
+    <div class="card"><div class="muted">Team Leader</div><strong>{{ trim(($student->tl_firstname ?? '').' '.($student->tl_lastname ?? '')) ?: 'Not assigned' }}</strong></div>
+</div>
 
-    <div class="grid">
-        <div class="card"><div class="label">Activation Point</div><div class="value">{{ $activation_point ?? '—' }}</div></div>
-        <div class="card"><div class="label">WhatsApp Pending</div><div class="value">{{ $total_whatsapp_status }}</div></div>
-    </div>
-
-    <div class="card">
-        <a class="btn" href="{{ route('student.profile') }}">Edit Profile</a>
-        <a class="btn" href="{{ route('student.welcome') }}">Student Home</a>
-    </div>
+<div class="grid">
+    <div class="card"><div class="muted">Activation Point</div><strong>{{ $activation_point ?? '—' }}</strong></div>
+    <div class="card"><div class="muted">WhatsApp Pending</div><strong>{{ $total_whatsapp_status }}</strong></div>
 </div>
 
 @if ((int)$student->student_status === 0 && (float)($student->student_point ?? 0) >= (float)($activation_point ?? 0))
 <div class="card">
-    <strong>Activation available:</strong>
-    You have enough points to activate your account.
-    <form method="POST" action="{{ route('student.profile.active') }}" style="margin-top:12px">
+    <strong>Activation available</strong>
+    <p>You have enough points to activate your account.</p>
+    <form method="POST" action="{{ route('student.profile.active') }}">
         @csrf
         <button class="btn" type="submit">Account Activation Request</button>
     </form>
 </div>
 @endif
 
+<div class="card">
+    <a class="btn" href="{{ route('student.profile') }}">Edit Profile</a>
+    <a class="btn btn-secondary" href="{{ route('student.welcome') }}">Student Home</a>
+</div>
+
 @if ((int)$student->student_status === 1)
 <div class="grid">
     <div class="card">
-        <div class="label">Referral</div>
-        <p class="muted">Share your referral link via WhatsApp.</p>
-        <a class="btn" target="_blank" href="https://api.whatsapp.com/send?text={{ urlencode($student->refer_link ?? '') }}">New Refer Request</a>
+        <div class="muted">Referral</div>
+        <p>Share your referral link via WhatsApp.</p>
+        <a class="btn" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?text={{ urlencode($student->refer_link ?? '') }}">New Refer Request</a>
     </div>
     <div class="card">
-        <div class="label">Copy Referral Link</div>
+        <div class="muted">Copy Referral Link</div>
         <input id="copyText" value="{{ $student->refer_link ?? '' }}" readonly style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd">
         <button class="btn" type="button" id="copyButton" style="margin-top:10px">Copy</button>
     </div>
 </div>
 <div class="card">
-    <div class="label">Active Student Group</div>
-    <p class="muted">Join the official WhatsApp group for active students.</p>
-    <a class="btn" target="_blank" href="https://chat.whatsapp.com/EtDN0714YFeBekqpss0hrQ">Join Now</a>
+    <div class="muted">Active Student Group</div>
+    <p>Join the official WhatsApp group for active students.</p>
+    <a class="btn" target="_blank" rel="noopener" href="https://chat.whatsapp.com/EtDN0714YFeBekqpss0hrQ">Join Now</a>
 </div>
 @endif
+@endsection
 
+@push('scripts')
 <script>
 document.getElementById('copyButton')?.addEventListener('click', async function () {
     const input = document.getElementById('copyText');
@@ -94,6 +80,4 @@ document.getElementById('copyButton')?.addEventListener('click', async function 
     }
 });
 </script>
-
-</body>
-</html>
+@endpush
