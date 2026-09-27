@@ -1,0 +1,11 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{ $user ? 'Edit':'Add' }} Admin User</title><style>body{font-family:Arial;background:#f5f7fb;margin:0}.wrap{max-width:760px;margin:auto;padding:25px}.card{background:#fff;padding:22px;border-radius:12px;border:1px solid #e5e7eb}label{display:block;margin:12px 0 6px}input,select{width:100%;box-sizing:border-box;padding:10px;border:1px solid #d0d5dd;border-radius:7px}.btn{margin-top:18px;padding:10px 15px;border:0;border-radius:7px;background:#2563eb;color:#fff}.err{color:#b91c1c}</style></head><body><div class="wrap"><div class="card"><h1>{{ $user ? 'Edit':'Add' }} Admin User</h1>@if($errors->any())<div class="err">@foreach($errors->all() as $e)<div>{{ $e }}</div>@endforeach</div>@endif
+<form method="POST" action="{{ $user ? route('admin.users.update',$user->user_id) : route('admin.users.store') }}">@csrf @if($user) @method('PUT') @endif
+<label>Username</label><input name="username" value="{{ old('username',$user->username ?? '') }}" required>
+<label>User Group</label><select name="user_group_id" required>@foreach($groups as $g)<option value="{{ $g->user_group_id }}" @selected(old('user_group_id',$user->user_group_id ?? '')==$g->user_group_id)>{{ $g->name }}</option>@endforeach</select>
+<label>First Name</label><input name="firstname" value="{{ old('firstname',$user->firstname ?? '') }}" required>
+<label>Last Name</label><input name="lastname" value="{{ old('lastname',$user->lastname ?? '') }}" required>
+<label>Email</label><input type="email" name="email" value="{{ old('email',$user->email ?? '') }}">
+<label>Password {{ $user ? '(leave blank to keep current)' : '' }}</label><input type="password" name="password" {{ $user ? '' : 'required' }}>
+<label>Confirm Password</label><input type="password" name="password_confirmation" {{ $user ? '' : 'required' }}>
+<label>Status</label><select name="status"><option value="1" @selected(old('status',$user->status ?? 1)==1)>Enabled</option><option value="0" @selected(old('status',$user->status ?? 1)==0)>Disabled</option></select>
+<button class="btn">Save</button> <a href="{{ route('admin.users.index') }}">Cancel</a></form></div></div></body></html>

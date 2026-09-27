@@ -1,0 +1,5 @@
+@extends('layouts.app')
+@section('title','Contact')
+@section('content')
+<div class="panel"><h1>Contact For Any Query</h1><p>Our Contact: Ruma, Rahul</p><p>Our Email: Webhaven755@gmail.com</p><p>Our Address: No Physical Address</p><form method="POST" action="{{ route('contact.send') }}">@csrf<div class="grid"><input name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required><input name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" required><input type="email" name="email" placeholder="Your Email" value="{{ old('email') }}" required><input name="subject" placeholder="Subject" value="{{ old('subject') }}" required></div><textarea name="message" placeholder="Message" required>{{ old('message') }}</textarea><button class="btn" type="submit">Send Message</button></form></div>
+@endsection

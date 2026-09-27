@@ -1,0 +1,11 @@
+@extends('layouts.admin')
+
+@section('title', 'students')
+
+@push('head')
+<style>body{font-family:Arial;background:#f5f7fb;margin:0;color:#1f2937}.wrap{max-width:1150px;margin:auto;padding:25px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;margin-top:18px}input,select{padding:9px;border:1px solid #d0d5dd;border-radius:7px;margin:3px}button,.btn{padding:9px 12px;border:0;border-radius:7px;background:#2563eb;color:#fff;text-decoration:none}table{width:100%;border-collapse:collapse;margin-top:15px}th,td{padding:10px;border-bottom:1px solid #eee;text-align:left}.nav a{margin-right:12px}</style>
+@endpush
+
+@section('content')
+<div class="wrap"><div class="nav"><a href="{{route('admin.dashboard')}}">Dashboard</a> <a href="{{route('admin.students.index')}}">Students</a></div><h1>Student Activation Report</h1><div class="card"><form><input type="date" name="from" value="{{$from}}"><input type="date" name="to" value="{{$to}}"><select name="role"><option value="">All</option><option value="trainer" @selected($role==='trainer')>Trainer</option><option value="teamleader" @selected($role==='teamleader')>Team Leader</option><option value="stl" @selected($role==='stl')>Senior Team Leader</option><option value="counsellor" @selected($role==='counsellor')>Counsellor</option></select><select name="user_id"><option value="">All Users</option>@foreach($users as $u)<option value="{{$u->user_id}}" @selected((string)$userId===(string)$u->user_id)>{{$u->firstname}} {{$u->lastname}} (#{{$u->user_id}})</option>@endforeach</select><input name="search" placeholder="Student / ID" value="{{request('search')}}"><button>Filter</button></form><p><strong>Total:</strong> {{$items->total()}}</p><table><tr><th>Activated</th><th>Student</th><th>Student No</th><th>Referrer</th><th>Referrer No</th></tr>@foreach($items as $i)<tr><td>{{$i->added_on}}</td><td>{{$i->student_name}}</td><td>{{$i->student_no}}</td><td>{{$i->refer_student_name}}</td><td>{{$i->refer_student_no}}</td></tr>@endforeach</table>{{$items->links()}}</div></div>
+@endsection

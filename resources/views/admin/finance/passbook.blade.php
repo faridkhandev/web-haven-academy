@@ -1,0 +1,11 @@
+@extends('layouts.admin')
+
+@section('title', 'passbook')
+
+@push('head')
+<style>body{font-family:Arial;background:#f5f7fb;margin:0}.wrap{max-width:1250px;margin:auto;padding:25px}.card{background:#fff;padding:18px;border:1px solid #e5e7eb;border-radius:12px;margin-top:18px}input,select,button{padding:8px;border:1px solid #ddd;border-radius:6px}table{width:100%;border-collapse:collapse;margin-top:15px}th,td{padding:8px;border-bottom:1px solid #eee;text-align:left}.credit{color:#15803d}.debit{color:#b91c1c}</style>
+@endpush
+
+@section('content')
+<div class="wrap"><h1>Student Passbook</h1><a href="{{route('admin.dashboard')}}">Dashboard</a><div class="card"><form><input name="student_no" placeholder="Student ID" value="{{request('student_no')}}"><input name="reason" placeholder="Reason" value="{{request('reason')}}"><select name="type"><option value="">All</option><option value="Credit" @selected(request('type')==='Credit')>Credit</option><option value="Debit" @selected(request('type')==='Debit')>Debit</option></select><input type="date" name="from" value="{{request('from')}}"><input type="date" name="to" value="{{request('to')}}"><button>Filter</button></form><table><tr><th>Date</th><th>Student</th><th>Reason</th><th>Credit</th><th>Debit</th><th>Balance</th></tr>@foreach($items as $i)<tr><td>{{$i->created_at}}</td><td>{{$i->student_no}} - {{$i->student_name}}</td><td>{{$i->reason}}<br><small>{{$i->description}}</small></td><td class="credit">{{$i->credit_point}}</td><td class="debit">{{$i->debit_point}}</td><td>{{$i->balance_point}}</td></tr>@endforeach</table>{{$items->links()}}</div></div>
+@endsection

@@ -1,0 +1,26 @@
+@extends('layouts.student')
+
+@section('title', "My Refer")
+
+@push('head')
+<style>
+body{margin:0;background:#0f2027;color:#fff;font-family:Arial,sans-serif}.wrap{max-width:1150px;margin:auto;padding:25px 15px}.card{background:#ffffff1a;border:1px solid #ffffff29;border-radius:16px;padding:18px;margin-bottom:16px}.btn{display:inline-block;padding:10px 15px;border:0;border-radius:999px;background:#ffc107;color:#111;text-decoration:none;font-weight:700}input{padding:10px;border-radius:10px;border:1px solid #ffffff33;background:#ffffff12;color:#fff}table{width:100%;border-collapse:collapse}th,td{padding:11px;border-bottom:1px solid #ffffff20;text-align:left}th{color:#ffc107}.muted{opacity:.7}.wa{color:#8ff0b0}
+</style>
+@endpush
+
+@section('content')
+<div class="wrap">
+<div class="card"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap"><h1>My Refer</h1><a class="btn" target="_blank" href="https://api.whatsapp.com/send?text={{ urlencode($student->refer_link ?? '') }}">Send New Refer Request</a></div></div>
+<div class="card"><form id="filter" style="display:flex;gap:10px;flex-wrap:wrap;align-items:end"><label>Start Date<br><input type="date" name="filter_start_date" value="{{ $filter_start_date }}"></label><label>End Date<br><input type="date" name="filter_end_date" value="{{ $filter_end_date }}"></label><button class="btn">Filter</button></form></div>
+<div class="card"><div style="overflow:auto"><table><thead><tr><th>ID</th><th>Name</th><th>Phone</th><th>Whatsapp</th><th>Gender</th><th>Date Added</th><th>Status</th><th>Action</th></tr></thead><tbody id="rows"></tbody></table></div></div></div>
+@endsection
+
+@push('scripts')
+<script>
+
+async function load(){const f=new FormData(document.querySelector('#filter'));f.append('draw','1');f.append('start','0');f.append('length','100');const r=await fetch('{{ route('student.refer.list') }}',{method:'POST',headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'},body:f});const j=await r.json();document.querySelector('#rows').innerHTML=j.data.map(x=>'<tr><td>'+x.student_no+'</td><td>'+x.student_name+'</td><td>'+x.student_phone+'</td><td><a class="wa" target="_blank" href="https://api.whatsapp.com/send?phone='+String(x.student_whatsapp||'').replace(/^\+/,'')+'">'+(x.student_whatsapp||'Go to whatsapp')+'</a></td><td>'+x.student_gender+'</td><td>'+x.created_at+'</td><td>'+(x.student_status==1?'Active':'Inactive')+'</td><td>'+(x.whatsapp_status==0?'<button class="btn" onclick="updateWa('+x.id+')">Update WhatsApp</button>':'')+'</td></tr>').join('')||'<tr><td colspan="8" class="muted">No referred students found.</td></tr>'}
+async function updateWa(id){const v=prompt('New WhatsApp No');if(!v)return;const f=new FormData();f.append('student_id',id);f.append('student_whatsapp',v);const r=await fetch('{{ route('student.refer.whatsapp') }}',{method:'POST',headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'},body:f});const j=await r.json();alert(j.success||j.error||'Done');if(j.success)load()}
+document.querySelector('#filter').addEventListener('submit',e=>{e.preventDefault();load()});load();
+
+</script>
+@endpush

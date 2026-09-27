@@ -1,0 +1,13 @@
+@extends('layouts.student')
+
+@section('title', "Joining Point Withdrawal")
+
+@push('head')
+<style>
+body{font-family:Arial;background:#f4f6f8;margin:0}.wrap{max-width:900px;margin:auto;padding:25px}.card{background:#fff;border-radius:16px;padding:25px}button{border:0;border-radius:10px;padding:11px 16px;background:#198754;color:#fff;cursor:pointer}
+</style>
+@endpush
+
+@section('content')
+<div class="wrap"><div class="card"><h2>Joining Point Withdrawal</h2>@if((int)$student->joining_point!==10000)<p>Sorry you are not authorize to view the content.</p>@elseif((int)$student->admin_approve!==1)<p>Your joining point <b>{{ $student->joining_point }}</b> is waiting for admin verification. After admin verify you can send withdrawal request.</p>@elseif((int)$student->is_point_requested===0)<p>Please send your joining point withdrawal request. Your joining point is <b>{{ $student->joining_point }}</b>.</p><form method="POST" action="{{ route('student.point.join') }}">@csrf<button>Joining Point Withdrawal Request</button></form>@elseif((int)$student->is_point_send===0)<p>You already requested to withdraw joining point <b>{{ $student->joining_point }}</b>. It is pending from admin approval.</p>@else<p>Admin already sent your joining point <b>{{ $student->joining_point }}</b>.</p>@endif</div></div>
+@endsection
