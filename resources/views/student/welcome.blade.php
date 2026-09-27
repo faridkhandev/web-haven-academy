@@ -1,14 +1,18 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Welcome | Student Panel</title>
+@extends('layouts.student')
+
+@section('title', "Welcome | Student Panel")
+
+@push('head')
 <style>
+
 body{margin:0;background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:#fff;font-family:Arial,sans-serif}
 .wrap{max-width:1100px;margin:auto;padding:28px 18px}.card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:20px;margin:14px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.btn{display:inline-block;padding:10px 16px;border-radius:999px;background:#ffc107;color:#111;text-decoration:none;font-weight:700}.muted{opacity:.75}.img{width:100%;height:210px;object-fit:cover;border-radius:12px}.pill{font-weight:800;color:#ffc107}
+
 </style>
-</head>
-<body><div class="wrap">
+@endpush
+
+@section('content')
+<div class="wrap">
 <div class="card" style="display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;align-items:center">
 <div><h1>Welcome to Student Panel</h1><div class="muted">Web Haven Media • Learn • Grow • Earn</div></div>
 <div><a class="btn" href="{{ route('student.dashboard') }}">Student Profile</a>
@@ -50,4 +54,5 @@ body{margin:0;background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:#
 @else
 <div class="card"><h2>Account awaiting activation</h2><p class="muted">Complete activation from your Student Profile when eligible.</p></div>
 @endif
-</div></body></html>
+</div>
+@endsection
