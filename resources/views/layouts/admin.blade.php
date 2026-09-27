@@ -11,12 +11,13 @@
 <header class="portal-header"><div class="container nav">
     <a class="brand" href="{{ route('admin.dashboard') }}">{{ config('app.name') }} Admin</a>
     <nav>
-        <a href="{{ route('admin.dashboard') }}">Dashboard</a>
-        <a href="{{ route('admin.students.index') }}">Students</a>
-        <a href="{{ route('admin.courses.index') }}">Courses</a>
-        <a href="{{ route('admin.sessions.index') }}">Sessions</a>
-        <a href="{{ route('admin.finance.passbook') }}">Finance</a>
-        <a href="{{ route('admin.settings.index') }}">Settings</a>
+@php($adminAllowed = $adminAllowed ?? ['*' => true])
+        @if(isset($adminAllowed['*']) || isset($adminAllowed['admin.dashboard']))<a href="{{ route('admin.dashboard') }}">Dashboard</a>@endif
+        @if(isset($adminAllowed['*']) || isset($adminAllowed['admin.students.index']))<a href="{{ route('admin.students.index') }}">Students</a>@endif
+        @if(isset($adminAllowed['*']) || isset($adminAllowed['admin.courses.index']))<a href="{{ route('admin.courses.index') }}">Courses</a>@endif
+        @if(isset($adminAllowed['*']) || isset($adminAllowed['admin.sessions.index']))<a href="{{ route('admin.sessions.index') }}">Sessions</a>@endif
+        @if(isset($adminAllowed['*']) || isset($adminAllowed['admin.finance.passbook']))<a href="{{ route('admin.finance.passbook') }}">Finance</a>@endif
+        @if(isset($adminAllowed['*']) || isset($adminAllowed['admin.settings.index']))<a href="{{ route('admin.settings.index') }}">Settings</a>@endif
         <form class="inline" method="POST" action="{{ route('admin.logout') }}">@csrf<button class="link-button">Logout</button></form>
     </nav>
 </div></header>
