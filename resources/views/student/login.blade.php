@@ -1,3 +1,8 @@
+@extends('layouts.student')
+
+@section('title', "login.blade.php")
+
+@section('content')
 @extends('layouts.app')
 
 @section('title', 'Student Login')
@@ -44,4 +49,5 @@
     </div>
 </div>
 
+@endsection
 @endsection
