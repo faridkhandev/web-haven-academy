@@ -1,11 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Courses</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Courses')
+
+@section('content')
+
     <main>
         <h1>Courses</h1>
 
@@ -41,5 +39,5 @@
             @endforelse
         </section>
     </main>
-</body>
-</html>
+
+@endsection
