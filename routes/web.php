@@ -43,7 +43,7 @@ Route::get('/forgot/resetpassword/token/{token}',[ForgotController::class,'reset
 Route::post('/forgot/resetpassword/token/{token}',[ForgotController::class,'reset'])->name('forgot.reset.update');
 Route::get('/studentlogin',[StudentLoginController::class,'show'])->name('student.login');
 Route::post('/studentlogin',[StudentLoginController::class,'login'])->name('student.login.submit');
-Route::middleware('web')->group(function(){
+Route::middleware('student.auth')->group(function(){
 Route::get('/student/welcome',[StudentWelcomeController::class,'index'])->name('student.welcome');
 Route::get('/student/dashboard',[StudentDashboardController::class,'index'])->name('student.dashboard');
 Route::get('/student/profile',[StudentProfileController::class,'index'])->name('student.profile');
@@ -75,8 +75,8 @@ Route::view('/block','student.block')->name('student.block');
 Route::get('/adminlogin', [AdminLoginController::class, 'show'])->name('admin.login');
 Route::post('/adminlogin', [AdminLoginController::class, 'login'])->name('admin.login.submit');
 Route::post('/adminlogout', [AdminLoginController::class, 'logout'])->name('admin.logout');
+Route::middleware('admin.auth')->group(function(){
 Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-
 
 Route::get('/admin/reports/students', [\App\Http\Controllers\AdminReportController::class, 'students'])->name('admin.reports.students');
 Route::get('/admin/user-finance/passbook', [\App\Http\Controllers\AdminUserFinanceController::class, 'passbook'])->name('admin.userfinance.passbook');
@@ -143,3 +143,5 @@ Route::put('/admin/sessions/{session}', [AdminSessionController::class, 'update'
 Route::get('/admin/sessions/{session}/submissions', [AdminSessionController::class, 'submissions'])->name('admin.sessions.submissions');
 Route::post('/admin/sessions/submissions/{submission}/approve', [AdminSessionController::class, 'approve'])->name('admin.sessions.submission.approve');
 Route::post('/admin/sessions/submissions/{submission}/wrong', [AdminSessionController::class, 'wrong'])->name('admin.sessions.submission.wrong');
+
+});
