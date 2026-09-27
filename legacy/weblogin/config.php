@@ -25,9 +25,9 @@ define('DIR_PACKAGE', '/home/lucx394x9bjm/public_html/weblogin/core/package/');
 // DB
 define('DB_DRIVER', 'mysqli');
 define('DB_HOSTNAME', 'localhost');
-define('DB_USERNAME', 'koxvxvr');
-define('DB_PASSWORD', '8a)Yvdx^Sug');
-define('DB_DATABASE', 'kosxvv1');
+define('DB_USERNAME', '');
+define('DB_PASSWORD', '');
+define('DB_DATABASE', '');
 define('DB_PREFIX', 'bh_');
 
 //FOOTER
