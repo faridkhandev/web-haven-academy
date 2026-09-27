@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class AdminPointBuySellController extends Controller {
- private function guard(Request $r):void{abort_unless($r->session()->has('admin_user_id')&&(int)$r->session()->get('admin_user_group_id')===1,403);}
+ private function guard(Request $r):void{abort_unless($r->session()->has('admin_user_id'),403);}
  private function users(){return DB::table('bh_user as u')->leftJoin('bh_user_extra as e','e.user_id','=','u.user_id')->where('u.user_group_id',17)->select('u.user_id','u.username','u.firstname','u.lastname','e.user_no','e.buy_status','e.sell_status')->orderBy('u.user_id','desc');}
  public function index(Request $r){$this->guard($r);$users=$this->users()->paginate(30)->withQueryString();return view('admin.pointbuysell.index',compact('users'));}
  public function wallet(Request $r,int $user){$this->guard($r);$u=$this->users()->where('u.user_id',$user)->firstOrFail();$buy=$this->summary('point_buy',$user);$sell=$this->summary('point_sell',$user);$buys=DB::table('point_buy')->leftJoin('bh_student as s','s.id','=','point_buy.student_id')->where('point_buy.user_id',$user)->select('point_buy.*','s.student_no','s.student_name')->orderByDesc('point_buy.created_at')->paginate(30,['*'],'buy')->withQueryString();$sells=DB::table('point_sell')->leftJoin('bh_student as s','s.id','=','point_sell.student_id')->where('point_sell.user_id',$user)->select('point_sell.*','s.student_no','s.student_name')->orderByDesc('point_sell.created_at')->paginate(30,['*'],'sell')->withQueryString();return view('admin.pointbuysell.wallet',compact('u','buy','sell','buys','sells'));}
