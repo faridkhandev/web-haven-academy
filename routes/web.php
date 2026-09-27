@@ -70,8 +70,8 @@ Route::post('/student/point/joinrequest',[StudentPointController::class,'joinReq
 Route::get('/student/password',[StudentPasswordController::class,'edit'])->name('student.password');
 Route::post('/student/password',[StudentPasswordController::class,'update'])->name('student.password.update');
 Route::get('/student/logout',StudentLogoutController::class)->name('student.logout');
-Route::view('/block','student.block')->name('student.block');
 });
+Route::view('/block','student.block')->name('student.block');
 Route::get('/adminlogin', [AdminLoginController::class, 'show'])->name('admin.login');
 Route::post('/adminlogin', [AdminLoginController::class, 'login'])->name('admin.login.submit');
 Route::post('/adminlogout', [AdminLoginController::class, 'logout'])->name('admin.logout');
