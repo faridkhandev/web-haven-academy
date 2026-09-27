@@ -15,7 +15,7 @@
                 <article>
                     <h3>{{ $course->course_name }}</h3>
                     @if(!empty($course->course_image))
-                        <img src="{{ asset('weblogin/image/'.$course->course_image) }}"
+                        <img src="{{ asset('images/courses/'.$course->course_image) }}"
                              alt="{{ $course->course_name }}"
                              loading="lazy">
                     @endif
@@ -31,7 +31,7 @@
                 <article>
                     <h3>{{ $course->course_name }}</h3>
                     @if(!empty($course->course_image))
-                        <img src="{{ asset('weblogin/image/'.$course->course_image) }}"
+                        <img src="{{ asset('images/courses/'.$course->course_image) }}"
                              alt="{{ $course->course_name }}"
                              loading="lazy">
                     @endif
