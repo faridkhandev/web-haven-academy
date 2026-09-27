@@ -10,6 +10,11 @@ use Illuminate\Validation\Rule;
 
 class AdminUserController extends Controller
 {
+    private function guard(Request $request): void
+    {
+        abort_unless($request->session()->has('admin_user_id') && (int)$request->session()->get('admin_user_group_id') === 1, 403);
+    }
+
 
     public function index(Request $request)
     {
