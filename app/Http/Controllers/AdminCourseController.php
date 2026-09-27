@@ -9,4 +9,10 @@ class AdminCourseController extends Controller{
  public function store(Request $r){$this->guard($r);$d=$r->validate(['course_name'=>['required','string','min:3','max:50'],'course_description'=>['nullable','string'],'no_of_classes'=>['required','string','max:20'],'priority'=>['required','integer'],'course_status'=>['required','boolean'],'per_session_point'=>['required','numeric','min:0'],'require_validation'=>['required','in:1,2'],'course_image'=>['nullable','string','max:255']]);$d['course_delete_status']=0;$d['created_at']=now();$d['updated_at']=now();$d['created_by']=(int)$r->session()->get('admin_user_id');$d['updated_by']=$d['created_by'];DB::table('bh_course')->insert($d);return redirect()->route('admin.courses.index')->with('success','Course created successfully.');}
  public function edit(Request $r,int $course){$this->guard($r);$c=DB::table('bh_course')->where('course_id',$course)->where('course_delete_status',0)->first();abort_unless($c,404);return view('admin.courses.form',['course'=>$c]);}
  public function update(Request $r,int $course){$this->guard($r);$c=DB::table('bh_course')->where('course_id',$course)->where('course_delete_status',0)->first();abort_unless($c,404);$d=$r->validate(['course_name'=>['required','string','min:3','max:50'],'course_description'=>['nullable','string'],'no_of_classes'=>['required','string','max:20'],'priority'=>['required','integer'],'course_status'=>['required','boolean'],'per_session_point'=>['required','numeric','min:0'],'require_validation'=>['required','in:1,2'],'course_image'=>['nullable','string','max:255']]);$d['updated_at']=now();$d['updated_by']=(int)$r->session()->get('admin_user_id');DB::table('bh_course')->where('course_id',$course)->update($d);return redirect()->route('admin.courses.index')->with('success','Course updated successfully.');}
+
+ private function guard(Request $request): bool
+ {
+     return $request->session()->has('admin_user_id');
+ }
+
 }
