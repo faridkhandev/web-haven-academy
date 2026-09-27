@@ -1,5 +1,15 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Withdrawal Medium</title>
-<style>body{margin:0;background:#0f2027;color:#fff;font-family:Arial,sans-serif}.wrap{max-width:1000px;margin:auto;padding:25px 15px}.card{background:#ffffff1a;border:1px solid #ffffff29;border-radius:18px;padding:20px;margin-bottom:16px}.row{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin-bottom:10px}select,input{width:100%;box-sizing:border-box;padding:11px;border-radius:10px;border:1px solid #ffffff30;background:#ffffff12;color:#fff}option{color:#111}.btn{padding:10px 16px;border:0;border-radius:999px;background:#ffc107;color:#111;font-weight:700}.danger{background:#dc3545;color:#fff}.add{background:#fff}.error{background:#842029;padding:10px;border-radius:10px;margin-bottom:12px}.success{background:#146c43;padding:10px;border-radius:10px;margin-bottom:12px}</style></head><body><div class="wrap">
+@extends('layouts.student')
+
+@section('title', "Withdrawal Medium")
+
+@push('head')
+<style>
+body{margin:0;background:#0f2027;color:#fff;font-family:Arial,sans-serif}.wrap{max-width:1000px;margin:auto;padding:25px 15px}.card{background:#ffffff1a;border:1px solid #ffffff29;border-radius:18px;padding:20px;margin-bottom:16px}.row{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin-bottom:10px}select,input{width:100%;box-sizing:border-box;padding:11px;border-radius:10px;border:1px solid #ffffff30;background:#ffffff12;color:#fff}option{color:#111}.btn{padding:10px 16px;border:0;border-radius:999px;background:#ffc107;color:#111;font-weight:700}.danger{background:#dc3545;color:#fff}.add{background:#fff}.error{background:#842029;padding:10px;border-radius:10px;margin-bottom:12px}.success{background:#146c43;padding:10px;border-radius:10px;margin-bottom:12px}
+</style>
+@endpush
+
+@section('content')
+<div class="wrap">
 <div class="card"><h1>Withdrawal Medium List</h1><p>Choose medium type and enter your mobile/account number.</p></div>
 @if($errors->any())<div class="error">{{ $errors->first() }}</div>@endif
 @if(session('success'))<div class="success">{{ session('success') }}</div>@endif
@@ -7,4 +17,11 @@
 <form method="POST" action="{{ route('student.medium.update') }}"><div class="card" id="medium-list">
 @foreach($mediums as $i=>$m)<div class="row medium-row"><div><label>Medium</label><select name="payment_medium[{{ $i }}][medium_name]">@foreach($payment as $p)<option value="{{ $p }}" @selected($p===$m->medium_name)>{{ $p }}</option>@endforeach</select></div><div><label>Mobile / Account No</label><input name="payment_medium[{{ $i }}][medium_code]" value="{{ $m->medium_code }}" required></div><button type="button" class="btn danger" onclick="this.parentElement.remove()">Remove</button></div>@endforeach
 </div><div class="card"><button type="button" class="btn add" onclick="addMedium()">+ Add</button> <button type="submit" class="btn">Save</button></div></form>
-</div><script>let i={{ $mediums->count() }};function addMedium(){let p=@json($payment);let d=document.createElement('div');d.className='row medium-row';d.innerHTML='<div><label>Medium</label><select name="payment_medium['+i+'][medium_name]">'+p.map(x=>'<option value="'+x+'">'+x+'</option>').join('')+'</select></div><div><label>Mobile / Account No</label><input name="payment_medium['+i+'][medium_code]" required></div><button type="button" class="btn danger" onclick="this.parentElement.remove()">Remove</button>';document.querySelector('#medium-list').appendChild(d);i++}</script></body></html>
+</div>
+@endsection
+
+@push('scripts')
+<script>
+let i={{ $mediums->count() }};function addMedium(){let p=@json($payment);let d=document.createElement('div');d.className='row medium-row';d.innerHTML='<div><label>Medium</label><select name="payment_medium['+i+'][medium_name]">'+p.map(x=>'<option value="'+x+'">'+x+'</option>').join('')+'</select></div><div><label>Mobile / Account No</label><input name="payment_medium['+i+'][medium_code]" required></div><button type="button" class="btn danger" onclick="this.parentElement.remove()">Remove</button>';document.querySelector('#medium-list').appendChild(d);i++}
+</script>
+@endpush
