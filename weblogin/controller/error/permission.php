@@ -91,7 +91,9 @@ class ControllerErrorPermission extends Controller {
 				'dashboard/recent'
 			);
 
-			if (!in_array($route, $ignore) && !$this->user->hasPermission('access', $route)) {
+			$role_allowed = ($route === 'user/controller_attendance' && in_array((int)$this->user->getGroupId(), array(1, 16)));
+
+			if (!in_array($route, $ignore) && !$role_allowed && !$this->user->hasPermission('access', $route)) {
 				return new Action('error/permission');
 			}
 		}
