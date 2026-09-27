@@ -1,9 +1,9 @@
 <?php
-namespace AppHttpControllers;
-use IlluminateHttpRequest;
-use IlluminateSupportFacadesDB;
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 class AdminAttendanceController extends Controller {
- private function guard(Request $r):void{abort_unless($r->session()->has('admin_user_id')&&(int)$r->session()->get('admin_user_group_id')===1,403);}
+ private function guard(Request $r):void{abort_unless($r->session()->has('admin_user_id'),403);}
  private function range(Request $r):array{return [$r->input('from',now()->startOfMonth()->toDateString()),$r->input('to',now()->endOfMonth()->toDateString())];}
  public function student(Request $r){$this->guard($r);[$from,$to]=$this->range($r);$q=DB::table('bh_course_to_session as cs')->leftJoin('bh_user as u','u.user_id','=','cs.session_teacher_id')->whereBetween(DB::raw('DATE(cs.session_date)'),[$from,$to]);if($r->filled('teacher_id'))$q->where('cs.session_teacher_id',$r->teacher_id);$q->select('cs.session_teacher_id',DB::raw("TRIM(CONCAT(COALESCE(u.firstname,''),' ',COALESCE(u.lastname,''))) as teacher_name"),DB::raw('COUNT(DISTINCT cs.meeting_link) as total_class'))->groupBy('cs.session_teacher_id','u.firstname','u.lastname')->orderByDesc('total_class');$teachers=DB::table('bh_user')->where('user_group_id',14)->where('status',1)->orderBy('firstname')->get();return view('admin.attendance.student',compact('q','teachers','from','to'))->with('items',$q->paginate(30)->withQueryString());}
  public function all(Request $r){$this->guard($r);[$from,$to]=$this->range($r);$q=DB::table('bh_course_to_session as cs')->leftJoin('bh_user as u','u.user_id','=','cs.session_teacher_id')->whereBetween(DB::raw('DATE(cs.session_date)'),[$from,$to]);if($r->filled('teacher_id'))$q->where('cs.session_teacher_id',$r->teacher_id);$q->select('cs.session_teacher_id',DB::raw("TRIM(CONCAT(COALESCE(u.firstname,''),' ',COALESCE(u.lastname,''))) as teacher_name"),DB::raw('COUNT(DISTINCT cs.meeting_link) as total_class'))->groupBy('cs.session_teacher_id','u.firstname','u.lastname')->orderByDesc('total_class');$teachers=DB::table('bh_user')->where('user_group_id',14)->where('status',1)->orderBy('firstname')->get();return view('admin.attendance.all',compact('teachers','from','to'))->with('items',$q->paginate(30)->withQueryString());}
