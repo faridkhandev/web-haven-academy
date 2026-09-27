@@ -55,6 +55,9 @@ class AdminPermission
             abort(403, 'You do not have permission to perform this action.');
         }
 
+        $viewAllowed = array_fill_keys(array_merge($permissions['access'], $permissions['modify']), true);
+        view()->share('adminAllowed', $viewAllowed);
+
         return $next($request);
     }
 
