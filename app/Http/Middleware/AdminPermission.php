@@ -44,10 +44,11 @@ class AdminPermission
                 $allowed = in_array($resource, $permissions[$bucket], true);
             }
 
-            // Detail/create/edit routes inherit the resource index/modify permission.
-            if (!$allowed && count($parts) >= 3 && $parts[0] === 'admin') {
+            // Detail/create/edit routes inherit the resource index permission for reads,
+            // while writes require an explicit modify permission.
+            if (!$allowed && $bucket === 'access' && count($parts) >= 3 && $parts[0] === 'admin') {
                 $resourceIndex = $parts[0] . '.' . $parts[1] . '.index';
-                $allowed = in_array($resourceIndex, $permissions[$bucket], true);
+                $allowed = in_array($resourceIndex, $permissions['access'], true);
             }
         }
 
