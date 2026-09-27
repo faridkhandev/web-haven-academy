@@ -1,74 +1,48 @@
-# Laravel Migration Plan
+# Laravel Migration
 
-## Current application
+The active application in this branch is now a **Laravel 13 application at the repository root**.
 
-This repository is a CodeIgniter 3 application. The legacy application contains:
-- `application/controllers` and nested student controllers
-- `application/models`
-- `application/views`
-- `application/migrations` (8 legacy migrations)
-- custom libraries/helpers/core classes
-- a separate `weblogin` application with its own MVC structure
-- legacy session-based student authentication
+## Structure
 
-## Target
+- `app/` — Laravel controllers, models, middleware and providers
+- `bootstrap/` — Laravel application bootstrap
+- `config/` — Laravel configuration
+- `database/` — Laravel database area
+- `public/` — web document root, assets and uploads
+- `resources/views/` — Blade templates and shared layouts
+- `routes/web.php` — application routes
+- `storage/` — Laravel runtime storage
+- `legacy/` — isolated CodeIgniter/OpenCart-era source kept only as migration reference
 
-Migrate incrementally to Laravel 13 while keeping the existing MySQL database and URLs stable during the transition. Laravel 13 requires PHP 8.3+ and is the current major release. The migration should use Laravel's `routes/web.php`, controllers, Eloquent/query builder, Blade views, middleware and environment-based configuration.
+There is no active `laravel/` sub-application. The Laravel application itself is the repository root.
 
-## Phase 1 — foundation
+## Database
 
-1. Create an isolated Laravel application under the `laravel/` directory.
-2. Keep the legacy CodeIgniter application untouched while Laravel modules are ported.
-3. Connect Laravel to the existing MySQL database using environment variables.
-4. Add a Laravel student model targeting the existing `bh_student` table.
-5. Port student login and student welcome routes/controllers.
-6. Replace the legacy MD5 password check with a compatibility check and re-hash successful logins using Laravel's password hashing.
-7. Preserve the existing student session semantics initially; later migrate to Laravel authentication middleware.
+The migration continues to use the existing MySQL database and existing `bh_*` tables. No replacement database is required.
 
-## Phase 2 — student module
+## Converted areas
 
-Port these controllers/views in this order:
-- Dashboard
-- Profile
-- Password
-- Ourcourse / Course
-- Payment
-- Passbook
-- Refer
-- Sellpoint / Sellpointlist
-- Medium
-- Withdrawal / Joinpoint
-- Logout
+Student login, welcome, dashboard, profile, password, courses/session work, passbook, withdrawal, refer, payment-related history, medium, join point and logout are implemented with Laravel controllers and Blade views.
 
-## Phase 3 — public site
+Public home, courses, registration, password reset, about, contact, privacy, terms and creator-zone are implemented.
 
-Port:
-- Frontend
-- About
-- Courses
-- Coursedetails
-- Contact
-- Register
-- Forgot / Resetpassword
-- Privacy
-- Termsconditions
-- Creatorzone / Facilities / Page / Block
+Admin dashboard, login, users, students, referrals, finance, withdrawals, courses, sessions, permissions, settings, attendance, reports, point buy/sell, user finance and profile are implemented.
 
-## Phase 4 — admin
+## Authentication
 
-Port the webadmin controllers/views and replace the custom admin session flow with Laravel authentication, authorization and policies.
+Student and admin portal routes use Laravel middleware aliases:
 
-## Database strategy
+- `student.auth`
+- `admin.auth`
 
-Do **not** rewrite the production schema blindly. The existing database uses the `bh_` prefix and contains tables referenced directly by the application. First map the current schema, then add Laravel migrations only for controlled schema changes. Existing tables can be used directly by Eloquent during the transition.
+Legacy password compatibility remains only where required for existing accounts; successful legacy passwords are upgraded to Laravel hashing.
 
-## Security blockers
+## cPanel deployment
 
-- Database credentials were committed in `weblogin/config.php`. These credentials must be rotated and moved to server environment variables before production deployment.
-- The current student login uses MD5. Do not keep MD5 for new passwords; use Laravel's password hashing and re-hash legacy passwords after a successful compatibility login.
-- Existing SQL contains string interpolation in several places. Ported code must use Eloquent/query-builder bindings instead.
-- Existing sessions should be replaced progressively with Laravel session/auth middleware.
+The cPanel document root should point to:
 
-## First converted module
+`/path/to/repository/public`
 
-The first Laravel conversion in this branch is the student login/welcome flow. It intentionally targets the existing database so the migration can be tested without changing production data.
+The server must use PHP 8.3+ and run Composer dependencies from the repository root.
+
+Do not commit production `.env` values. Existing legacy database/SMTP credentials must be rotated before production use.
