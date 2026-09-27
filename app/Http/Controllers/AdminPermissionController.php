@@ -27,6 +27,9 @@ class AdminPermissionController extends Controller {
  private function decode($value){
   if(!$value)return ['access'=>[],'modify'=>[]];
   $p=@unserialize($value);
-  return is_array($p)?['access'=>array_values($p['access']??[]),'modify'=>array_values($p['modify']??[])]:['access'=>[],'modify'=>[]];
+  if(!is_array($p)) $p=json_decode($value,true);
+  return is_array($p)
+   ? ['access'=>array_values(array_map('strval',$p['access']??[])),'modify'=>array_values(array_map('strval',$p['modify']??[]))]
+   : ['access'=>[],'modify'=>[]];
  }
 }
