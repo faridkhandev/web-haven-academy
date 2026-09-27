@@ -82,7 +82,6 @@ class ModelCommonDashboard extends Model {
                 array('label'=>'Today\'s Classes','value'=>$this->count("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "course_to_session cs WHERE DATE(cs.session_date)='" . $today . "' AND cs.session_teacher_id='" . $user_id . "'"),'icon'=>'fa-calendar','class'=>'primary','link'=>'module/session','footer'=>'My Classes'),
                 array('label'=>'Upcoming Classes','value'=>$this->count("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "course_to_session cs WHERE DATE(cs.session_date)>'" . $today . "' AND cs.session_teacher_id='" . $user_id . "'"),'icon'=>'fa-clock-o','class'=>'warning','link'=>'module/session','footer'=>'Class Schedule'),
                 array('label'=>'My Total Classes','value'=>$this->count("SELECT COUNT(DISTINCT cs.meeting_link) AS total FROM " . DB_PREFIX . "course_to_session cs WHERE cs.session_teacher_id='" . $user_id . "'"),'icon'=>'fa-users','class'=>'success','link'=>'module/session','footer'=>'My Class List')
-                ,array('label'=>'Attendance','value'=>$this->count("SELECT COUNT(DISTINCT cs.meeting_link) AS total FROM " . DB_PREFIX . "course_to_session cs WHERE cs.session_teacher_id='" . $user_id . "' AND DATE(cs.session_date) BETWEEN '" . date('Y-m-01') . "' AND '" . $today . "'"),'icon'=>'fa-calendar-check-o','class'=>'info','link'=>'module/attendance','footer'=>'View Attendance')
             );
             return $stats;
         }
