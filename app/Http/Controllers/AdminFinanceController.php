@@ -33,4 +33,10 @@ class AdminFinanceController extends Controller {
  }
 
  public function withdrawals(Request $r){$this->guard($r);$q=DB::table('bh_student_withdrawal_request as w')->join('bh_student as s','s.id','=','w.student_id')->where('s.student_delete_status',0)->select('w.*','s.student_no','s.student_name','s.student_whatsapp');if($r->filled('student_no'))$q->where('s.student_no',$r->student_no);if($r->filled('status'))$q->where('w.approve_status',$r->status);if($r->filled('from'))$q->whereDate('w.requested_at','>=',$r->from);if($r->filled('to'))$q->whereDate('w.requested_at','<=',$r->to);return view('admin.finance.withdrawals',['items'=>$q->orderByDesc('w.id')->paginate(30)->withQueryString()]);}
+
+ private function guard(Request $request): bool
+ {
+     return $request->session()->has('admin_user_id');
+ }
+
 }
