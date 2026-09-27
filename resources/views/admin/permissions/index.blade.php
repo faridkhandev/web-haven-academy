@@ -16,7 +16,7 @@ $accessRoutes = [
  'admin.userfinance.passbook','admin.userfinance.payments','admin.userfinance.withdrawals',
  'admin.pointbuysell.index','admin.pointbuysell.requests','admin.pointbuysell.wallet',
  'admin.attendance.student','admin.attendance.all','admin.attendance.teacher','admin.attendance.teacher.details',
- 'admin.settings.index','admin.permissions.index','admin.profile.edit',
+ 'admin.profile.edit',
  'admin.users.index','admin.users.create','admin.users.edit',
  'admin.students.index','admin.students.quick','admin.students.referrals','admin.students.edit',
  'admin.finance.passbook','admin.finance.payments','admin.finance.withdrawals','admin.finance.withdrawal.process',
@@ -26,7 +26,7 @@ $accessRoutes = [
 $modifyRoutes = [
  'admin.userfinance.withdrawals.process',
  'admin.pointbuysell.accept','admin.pointbuysell.complain','admin.pointbuysell.convert','admin.pointbuysell.status',
- 'admin.settings.update','admin.permissions.update','admin.profile.update',
+ 'admin.profile.update',
  'admin.users.store','admin.users.update','admin.users.destroy',
  'admin.students.activate','admin.students.add-point','admin.students.remove-point','admin.students.assign-counsellor',
  'admin.students.join-approve','admin.students.join-send','admin.students.update','admin.students.block','admin.students.unblock',
