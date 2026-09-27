@@ -261,6 +261,7 @@ class ControllerUserController extends Controller {
 		$data['withdrawal'] = $this->url->link('user/withdrawal', '&token=' . $this->session->data['token'], TRUE);
 		$data['passbook'] = $this->url->link('user/passbook', '&token=' . $this->session->data['token'], TRUE);
 		$data['student'] = $this->url->link('user/controllerstudent', '&token=' . $this->session->data['token'], TRUE);
+		$data['attendance'] = $this->url->link('user/controller/attendance', 'token=' . $this->session->data['token'], TRUE);
 		
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
