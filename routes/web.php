@@ -75,7 +75,7 @@ Route::view('/block','student.block')->name('student.block');
 Route::get('/adminlogin', [AdminLoginController::class, 'show'])->name('admin.login');
 Route::post('/adminlogin', [AdminLoginController::class, 'login'])->name('admin.login.submit');
 Route::post('/adminlogout', [AdminLoginController::class, 'logout'])->name('admin.logout');
-Route::middleware('admin.auth')->group(function(){
+Route::middleware(['admin.auth','admin.permission'])->group(function(){
 Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::get('/admin/reports/students', [\App\Http\Controllers\AdminReportController::class, 'students'])->name('admin.reports.students');
