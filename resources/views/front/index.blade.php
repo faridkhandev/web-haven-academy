@@ -1,11 +1,9 @@
-<!doctype html>
-<html lang="bn">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>WebHaven Academy</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Home')
+
+@section('content')
+
 <main>
 <section>
 <span>WebHaven Academy</span>
@@ -49,5 +47,5 @@
 <p>ISO Certificate No.: WHA/QMS/IND/2026/0214-7789</p>
 </section>
 </main>
-</body>
-</html>
+
+@endsection
