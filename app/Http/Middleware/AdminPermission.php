@@ -33,7 +33,24 @@ class AdminPermission
             ? 'modify'
             : 'access';
 
-        if (!in_array($routeName, $permissions[$bucket], true)) {
+        $allowed = in_array($routeName, $permissions[$bucket], true);
+
+        // Resource sub-routes inherit the resource's index permission.
+        if (!$allowed) {
+            $parts = explode('.', $routeName);
+            if (count($parts) >= 3 && $parts[0] === 'admin') {
+                $resource = $parts[0] . '.' . $parts[1] . '.' . $parts[2];
+                $allowed = in_array($resource, $permissions[$bucket], true);
+            }
+
+            // Detail/create/edit routes inherit the resource index/modify permission.
+            if (!$allowed && count($parts) >= 3 && $parts[0] === 'admin') {
+                $resourceIndex = $parts[0] . '.' . $parts[1] . '.index';
+                $allowed = in_array($resourceIndex, $permissions[$bucket], true);
+            }
+        }
+
+        if (!$allowed) {
             abort(403, 'You do not have permission to perform this action.');
         }
 
