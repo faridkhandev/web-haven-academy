@@ -175,6 +175,7 @@
 					html += '&nbsp;<a target="_blank" href="<?php echo $withdrawal;?>&id=' + data + '&user_no=' + full.user_no + '" type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="Show Withdrawal Request"><i class="fa fa-hand-lizard-o"></i></a>';
 					html += '&nbsp;<a target="_blank" href="<?php echo $payment;?>&id=' + data + '&user_no=' + full.user_no + '" type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="Show Payment History"><i class="fa fa-money"></i></a>';
 					html += '&nbsp;<a target="_blank" href="<?php echo $student;?>&id=' + data + '" type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="Show Student List"><i class="fa fa-users"></i></a>';
+					html += '&nbsp;<a href="<?php echo $attendance;?>&meeting_time_id=0" type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="Counsellor Attendance"><i class="fa fa-clock-o"></i></a>';
 					html += '&nbsp;<a data-toggle="modal" data-target="#confirm-status" data-id=' + data + ' data-user_no=' + full.user_no + ' data-name="' + full.name + '" data-phone="' + full.phone + '" data-whatsapp="' + full.whatsapp + '" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="Send Point"><i class="fa fa-share"></i></a>';
 					
 					return html;
