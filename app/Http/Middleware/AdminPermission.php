@@ -15,6 +15,7 @@ class AdminPermission
 
         // Super admin keeps unrestricted access.
         if ($groupId === 1) {
+            view()->share('adminAllowed', ['*' => true]);
             return $next($request);
         }
 
