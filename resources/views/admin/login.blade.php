@@ -1,9 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Super Admin Login</title>
+@extends('layouts.admin')
+
+@section('title', 'login')
+
+@push('head')
 <style>
 body{margin:0;background:#f5f7fb;font-family:Arial,sans-serif}
 .wrap{min-height:100vh;display:grid;place-items:center;padding:24px;box-sizing:border-box}
@@ -15,8 +14,9 @@ button{width:100%;margin-top:20px;padding:12px;border:0;border-radius:9px;backgr
 .alert{padding:11px;border-radius:8px;background:#fee4e2;color:#b42318;margin-bottom:14px}
 .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#fef3f2;color:#b42318;font-size:12px;font-weight:800;margin-bottom:12px}
 </style>
-</head>
-<body>
+@endpush
+
+@section('content')
 <div class="wrap"><div class="card">
 <span class="badge">SUPER ADMIN</span>
 <h1>Web Haven Academy</h1>
@@ -31,5 +31,4 @@ button{width:100%;margin-top:20px;padding:12px;border:0;border-radius:9px;backgr
 <button type="submit">Login</button>
 </form>
 </div></div>
-</body>
-</html>
+@endsection
