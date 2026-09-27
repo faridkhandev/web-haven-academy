@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Never expose the archived legacy application directly.
+    RewriteRule ^legacy(?:/|$) - [F,L]
+
+    # If the hosting account serves the repository root instead of public/,
+    # forward requests into Laravel's public directory.
+    RewriteCond %{REQUEST_URI} !^/public(?:/|$)
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
