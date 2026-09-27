@@ -1,11 +1,4 @@
 <?php
-    public function unblock(Request $request, int $student)
-    {
-        abort_unless($this->guard($request), 403);
-        DB::table('bh_student')->where('id',$student)->where('student_delete_status',0)->update(['student_status'=>1]);
-        return back()->with('success','Student unblocked successfully.');
-    }
-
 namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -27,4 +20,16 @@ class AdminStudentController extends Controller {
  public function joinApprove(Request $r,int $student){$this->guard($r);$s=Student::findOrFail($student);$s->admin_approve=1;$s->save();return back()->with('success','Join point approval completed.');}
  public function sendJoiningPoint(Request $r,int $student){$this->guard($r);$updated=DB::table('bh_student')->where('id',$student)->where('whatsapp_join',1)->where('telegram_join',1)->where('admin_approve',1)->where('is_point_requested',1)->update(['is_point_send'=>1]);abort_if(!$updated,422,'Joining point conditions are not complete.');return back()->with('success','Student joining point marked as sent.');}
  public function block(Request $r,int $student){$this->guard($r);$s=Student::findOrFail($student);abort_if((int)$s->student_status!==1,422);$s->student_status=2;$s->save();return back()->with('success','Student blocked successfully.');}
+ public function unblock(Request $request, int $student)
+ {
+     $this->guard($request);
+     DB::table('bh_student')->where('id',$student)->where('student_delete_status',0)->update(['student_status'=>1]);
+     return back()->with('success','Student unblocked successfully.');
+ }
+
+ private function guard(Request $request): bool
+ {
+     return $request->session()->has('admin_user_id');
+ }
+
 }
