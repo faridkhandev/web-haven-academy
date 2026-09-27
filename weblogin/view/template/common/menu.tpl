@@ -295,10 +295,10 @@
 	<?php if($group_id==16){?>
 	
 	
-	<!-- নতুন যুক্ত করা হলো: কন্ট্রোলারের জন্য Add Meeting Link মেনু -->
-	<li class="nav-item" id="addmeetinglink">
-		<a class="nav-link" href="<?php echo $addmeeting; ?>">
-			<span class="menu-title"><i class="fa fa-lg fa-fw fa-video-camera"></i>Add Meeting Link</span>
+	<!-- Controller Attendance -->
+	<li class="nav-item" id="controllerattendance">
+		<a class="nav-link" href="<?php echo $attendance; ?>">
+			<span class="menu-title"><i class="fa fa-lg fa-fw fa-calendar-check-o"></i>Attendance</span>
 		</a>
 	</li>
 	
