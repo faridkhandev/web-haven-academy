@@ -30,6 +30,10 @@ class ControllerUserControllerAttendance extends Controller {
         $data['add_time']=$this->url->link('user/controller/attendance/add_time','token='.$this->session->data['token'],'SSL');
         $data['delete_time']=$this->url->link('user/controller/attendance/delete_time','token='.$this->session->data['token'],'SSL');
         $data['reload']=$this->url->link('user/controller/attendance','token='.$this->session->data['token'],'SSL');
+        $data['history_from']=isset($this->request->get['history_from'])?$this->request->get['history_from']:date('Y-m-01');
+        $data['history_to']=isset($this->request->get['history_to'])?$this->request->get['history_to']:date('Y-m-d');
+        $data['history_counsellor']=isset($this->request->get['history_counsellor'])?(int)$this->request->get['history_counsellor']:0;
+        $data['history']= $is_admin ? $this->model_user_controller_attendance->getHistory($data['history_from'],$data['history_to'],$data['history_counsellor']) : array();
         $data['header']=$this->load->controller('common/header'); $data['column_left']=$this->load->controller('common/column_left'); $data['footer']=$this->load->controller('common/footer');
         $this->document->setTitle('Counsellor Attendance');
         $this->response->setOutput($this->load->view('user/controller_attendance.tpl',$data));
@@ -48,7 +52,7 @@ class ControllerUserControllerAttendance extends Controller {
     }
     public function add_time(){
         if(!$this->isSuperAdmin()){$this->json(array('error'=>'Only Super Admin can add meeting times.'));return;}
-        if($this->model_user_controller_attendance->addTime(isset($this->request->post['meeting_time'])?$this->request->post['meeting_time']:'')){$this->json(array('success'=>'Meeting time added.'));return;}
+        if($this->model_user_controller_attendance->addTime(isset($this->request->post['meeting_time'])?$this->request->post['meeting_time']:'') ){$this->json(array('success'=>'Meeting time added.'));return;}
         $this->json(array('error'=>'Invalid or duplicate meeting time.'));
     }
     public function delete_time(){
