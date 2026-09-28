@@ -62,8 +62,8 @@ class ModelCommonDashboard extends Model {
                 array('label'=>'Today\'s New Leads','value'=>$this->studentCount($base . " AND DATE(sc.added_date)='" . $today . "' AND s.student_status=0"),'icon'=>'fa-user-plus','class'=>'primary','link'=>'module/counsellorstudent','footer'=>'My Leads'),
                 array('label'=>'My Active IDs','value'=>$this->studentCount($base . " AND s.student_status=1"),'icon'=>'fa-check-circle','class'=>'success','link'=>'module/counsellorreport','footer'=>'My Report'),
                 array('label'=>'My Students','value'=>$this->studentCount($base),'icon'=>'fa-users','class'=>'info','link'=>'module/counsellorstudent','footer'=>'View My Students'),
-                array('label'=>'Attendance Days','value'=>$this->count("SELECT COUNT(DISTINCT attendance_date) AS total FROM " . $attendance_table . " WHERE counsellor_id='" . $user_id . "'"),'icon'=>'fa-calendar-check-o','class'=>'warning','link'=>'user/controller/attendance','footer'=>'My Attendance'),
-                array('label'=>'This Month Attendance','value'=>$this->count("SELECT COUNT(DISTINCT attendance_date) AS total FROM " . $attendance_table . " WHERE counsellor_id='" . $user_id . "' AND DATE_FORMAT(attendance_date,'%Y-%m')=DATE_FORMAT(CURDATE(),'%Y-%m')"),'icon'=>'fa-clock-o','class'=>'info','link'=>'user/controller/attendance','footer'=>'Attendance Details')
+                array('label'=>'Attendance Days','value'=>$this->count("SELECT COUNT(DISTINCT attendance_date) AS total FROM " . $attendance_table . " WHERE counsellor_id='" . $user_id . "'"),'icon'=>'fa-calendar-check-o','class'=>'warning','link'=>'user/controller_attendance','footer'=>'My Attendance'),
+                array('label'=>'This Month Attendance','value'=>$this->count("SELECT COUNT(DISTINCT attendance_date) AS total FROM " . $attendance_table . " WHERE counsellor_id='" . $user_id . "' AND DATE_FORMAT(attendance_date,'%Y-%m')=DATE_FORMAT(CURDATE(),'%Y-%m')"),'icon'=>'fa-clock-o','class'=>'info','link'=>'user/controller_attendance','footer'=>'Attendance Details')
             );
             return $stats;
         }
@@ -74,7 +74,7 @@ class ModelCommonDashboard extends Model {
             $stats['cards'] = array(
                 array('label'=>'Today\'s New Leads','value'=>$this->studentCount("WHERE s.student_delete_status=0 AND s.student_status=0 AND " . $lang . " AND DATE(s.created_at)='" . $today . "'"),'icon'=>'fa-user-plus','class'=>'primary','link'=>'module/controllerstudent','footer'=>'My Students'),
                 array('label'=>'Pending IDs','value'=>$this->studentCount("WHERE s.student_delete_status=0 AND s.student_status=0 AND " . $lang),'icon'=>'fa-clock-o','class'=>'warning','link'=>'module/controllerstudent','footer'=>'View Pending List'),
-                array('label'=>'Today\'s Classes','value'=>$this->count("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "course_to_session cs WHERE DATE(cs.session_date)='" . $today . "'"),'icon'=>'fa-video-camera','class'=>'info','link'=>'user/controller/attendance','footer'=>'Controller Attendance')
+                array('label'=>'Today\'s Classes','value'=>$this->count("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "course_to_session cs WHERE DATE(cs.session_date)='" . $today . "'"),'icon'=>'fa-video-camera','class'=>'info','link'=>'user/controller_attendance','footer'=>'Controller Attendance')
             );
             return $stats;
         }
