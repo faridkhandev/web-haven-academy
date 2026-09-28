@@ -26,10 +26,10 @@ class ControllerUserControllerAttendance extends Controller {
         $data['current_slot']=$current; $data['is_admin']=$is_admin; $data['is_super_admin']=$this->isSuperAdmin();
         $data['counsellors']=$this->model_user_controller_attendance->getCounsellors();
         $data['attendance']=$selected?$this->model_user_controller_attendance->getAttendanceMap($date,$selected):array();
-        $data['action']=$this->url->link('user/controller/attendance/save','token='.$this->session->data['token'],'SSL');
-        $data['add_time']=$this->url->link('user/controller/attendance/add_time','token='.$this->session->data['token'],'SSL');
-        $data['delete_time']=$this->url->link('user/controller/attendance/delete_time','token='.$this->session->data['token'],'SSL');
-        $data['reload']=$this->url->link('user/controller/attendance','token='.$this->session->data['token'],'SSL');
+        $data['action']=$this->url->link('user/controller_attendance/save','token='.$this->session->data['token'],'SSL');
+        $data['add_time']=$this->url->link('user/controller_attendance/add_time','token='.$this->session->data['token'],'SSL');
+        $data['delete_time']=$this->url->link('user/controller_attendance/delete_time','token='.$this->session->data['token'],'SSL');
+        $data['reload']=$this->url->link('user/controller_attendance','token='.$this->session->data['token'],'SSL');
         $data['history_from']=isset($this->request->get['history_from'])?$this->request->get['history_from']:date('Y-m-01');
         $data['history_to']=isset($this->request->get['history_to'])?$this->request->get['history_to']:date('Y-m-d');
         $data['history_counsellor']=isset($this->request->get['history_counsellor'])?(int)$this->request->get['history_counsellor']:0;
