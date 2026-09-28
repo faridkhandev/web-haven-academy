@@ -51,4 +51,10 @@ class ModelUserControllerAttendance extends Model {
         $this->db->query("INSERT INTO ".DB_PREFIX."controller_attendance SET attendance_date='".$this->db->escape($date)."', meeting_time_id='".(int)$meeting_time_id."', counsellor_id='".(int)$counsellor_id."', marked_at='".date('Y-m-d H:i:s')."', marked_by='".(int)$marked_by."'");
         return true;
     }
+    public function getHistory($date_from,$date_to,$counsellor_id=0) {
+        $sql="SELECT a.id,a.attendance_date,a.marked_at,a.marked_by,a.counsellor_id,t.meeting_time,u.firstname,u.lastname,ue.user_no,mu.firstname AS marker_firstname,mu.lastname AS marker_lastname FROM ".DB_PREFIX."controller_attendance a INNER JOIN ".DB_PREFIX."controller_attendance_time t ON t.id=a.meeting_time_id INNER JOIN ".DB_PREFIX."user u ON u.user_id=a.counsellor_id LEFT JOIN ".DB_PREFIX."user_extra ue ON ue.user_id=u.user_id LEFT JOIN ".DB_PREFIX."user mu ON mu.user_id=a.marked_by WHERE a.attendance_date BETWEEN '".$this->db->escape($date_from)."' AND '".$this->db->escape($date_to)."'";
+        if((int)$counsellor_id>0) $sql.=" AND a.counsellor_id='".(int)$counsellor_id."'";
+        $sql.=" ORDER BY a.attendance_date DESC,t.meeting_time DESC,u.firstname ASC,u.lastname ASC";
+        return $this->db->query($sql)->rows;
+    }
 }
